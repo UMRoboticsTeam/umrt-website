@@ -11061,7 +11061,8 @@ header.masthead h1, header.masthead .h1 {
 # Team
 --------------------------------------------------------------*/
 /* .team .member, .subsystem { */
-.member, .subsystem {
+/* .member, .subsystem { */
+.subsystem {
   /* position: relative; */
   /* box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); */
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.35);
@@ -11074,55 +11075,6 @@ header.masthead h1, header.masthead .h1 {
 .team .subsystem h2{
   text-align: center;
   padding-bottom: 10px;
-}
-
-/* .team .member .pic { */
-.member .pic {
-  overflow: hidden;
-  /* width: 120px; */
-  /* width: 50%; */
-  /* max-width: 120px; */
-  /* max-height: 120px; */
-  /* max-height: 160px; */
-  /* width: 20px; */
-  /* border-radius: 50%; */
-  /* aspect-ratio: 1; */
-  max-width: 201px;
-  max-height: 268px;
-}
-/* .team .member .pic img { */
-.member .pic img {
-  /* border-radius: 5%; */
-  /* object-fit: cover; */
-  /* width: 120px; */
-  /* min-height: 120px; */
-  /* min-width: 120px; */
-  border-radius: 7px;
-  object-fit: cover;
-  /* aspect-ratio: 1; */
-  /* aspect-ratio: 2 / 3; */
-  aspect-ratio: 3 / 4;
-}
-
-.team .subsystem .pic {
-  /* overflow: hidden; */
-  /* width: 120px; */
-  /* width: 50%; */
-  /* max-height: 80px; */
-  /* border-radius: 5px; */
-}
-.team .subsystem .pic img {
-  /* min-width: 120px; */
-  /* object-fit: cover; */
-}
-
-/* .team .member .pic img {
-  transition: ease-in-out 0.3s;
-} */
-
-/* .team .member .member-info { */
-.member .member-info {
-  padding-left: 20px;
 }
 
 /* .team .member h4 { */

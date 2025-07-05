@@ -1,5 +1,7 @@
 <template>
-  <div class="col-xl-4 col-md-6 mt-4 mt-lg-5">
+  <!-- <div class="col-xl-4 col-md-6 mt-4 mt-lg-5"> -->
+  <!-- <div class="col-xl-4 col-md-6 mt-4 mt-lg-5"> -->
+  <div class="col-lg-3 col-md-4 col-6">
     <div class="subsystem">
       <!-- <div class="py-3"> -->
       
