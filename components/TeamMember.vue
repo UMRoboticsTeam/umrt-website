@@ -1,6 +1,6 @@
 <template>
   <!-- <div class="col-xl-4 col-md-6 "> -->
-    <div class="member d-flex m-lg-3 m-md-2 m-1" ref="memberCard">
+    <div class="member d-flex" ref="memberCard">
       <div class="shine"></div>
       <div class="pic">
         <img :src="img" class="img-fluid" alt="member image">
@@ -38,6 +38,35 @@
   box-sizing: border-box; */
   /* width: 50%; */
   aspect-ratio: 3 / 5;
+
+  /* transition: all s ease; */
+  /* width: 18em; */
+  /* width: 30%; */
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .member {width: 10rem; font-size: 0.2em; margin: 0.5rem;}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .member {width: 10rem; font-size: 0.8em; margin: 0.5rem;}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .member {width: 10rem; font-size: 0.8em; margin: 0.5rem;}
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .member {width: 14rem; font-size: 0.9em; margin: 0.7rem;}
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .member {width: 18rem; font-size: 1em; margin: 0.9rem;}
 }
 
 .pic {

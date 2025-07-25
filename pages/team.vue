@@ -36,7 +36,7 @@
         </div> -->
 
         <div id="exec-team-div" style="flex-wrap: wrap;" class="d-flex justify-content-center">
-          <div class="col-lg-3 col-md-4 col-6" v-for="exec in teamList['exec_team']" >
+          <div class="" v-for="exec in teamList['exec_team']" >
           <!-- <div class="" v-for="exec in teamList['exec_team']" > -->
             <TeamMember
               :img="teamImages[exec['image']]" 
@@ -109,7 +109,7 @@
         </div> -->
 
         <!-- <div class="container px-4 px-lg-5">       -->
-        <div class="row d-flex justify-content-center" id="leads-div">
+        <div class="d-flex justify-content-center" id="leads-div">
           <!-- Insert subsystems leads -->
           <TeamSystem v-for="system in teamList['leads']" :img="teamImages[system['image']]" :name="system['name']" :desc="system['description']">
             <!-- <div class="col-xl-4 col-md-6 "> -->
@@ -125,7 +125,8 @@
         </div>
         <!-- </div> -->
         <!-- <div class="container px-4 px-lg-5"> -->
-        <div class="row d-flex justify-content-center" id="subsystems-div">
+          <!-- style="flex-wrap: wrap;" class="d-flex justify-content-center" -->
+        <div style="flex-wrap: wrap;" class="d-flex justify-content-center" id="subsystems-div">
           <!-- Insert subsystems -->
           <TeamSystem v-for="system in teamList['subsystems']" :img="teamImages[system['image']]" :name="system['name']" :desc="system['description']">
             <!-- <div class="col-xl-4 col-md-6 "> -->

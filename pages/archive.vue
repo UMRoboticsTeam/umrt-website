@@ -43,7 +43,7 @@
           Erica von Stackelberg, Breanna Stratton, Skylar Trudeau, Kevin Burston, Adam Garofalo, Ali Syed Ahmed, 
           Matthew Nutbean, Graham Nash, Noah Reeder, Edcel Abanto, Ghrum Yemessghen, Anna Kulchycki,
           Kate Lacerna, Spencer Molloy, Jonah St. Hilaire, Bryce Cadieux, Alessandro Potenza, Spencer Ryznar,
-          Daigh Burgess, Kyra Natividad, Ankit Kaur
+          Daigh Burgess, Kyra Natividad, Ankit Kaur, Quinn Gibbons
         </div>
       </div>
     </Section>

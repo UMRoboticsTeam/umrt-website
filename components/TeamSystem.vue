@@ -1,7 +1,8 @@
 <template>
   <!-- <div class="col-xl-4 col-md-6 mt-4 mt-lg-5"> -->
   <!-- <div class="col-xl-4 col-md-6 mt-4 mt-lg-5"> -->
-  <div class="col-lg-3 col-md-4 col-6">
+  <!-- <div class="col-lg-4 col-5 m-1"> -->
+  <div class="m-1">
     <div class="subsystem">
       <!-- <div class="py-3"> -->
       
@@ -20,7 +21,9 @@
         <!-- <img :src="img"> -->
       <!-- </div> -->
     </div>
-    <slot></slot>
+    <div class="d-flex" style="justify-content: center;">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -38,6 +41,32 @@ const props = defineProps({
   padding: 0 !important;
   /* height: 100px; */
   border-radius: 50px;
+
+  /* width: 32rem; */
+}
+
+@media only screen and (max-width: 600px) {
+  .subsystem {width: 22rem; font-size: 0.2em;}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .subsystem {width: 22rem; font-size: 0.8em;}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .subsystem {width: 22rem; font-size: 0.8em;}
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .subsystem {width: 30.8rem; font-size: 0.9em;}
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .subsystem {width: 39.6rem; font-size: 1em;}
 }
 .system-header {
   /* overflow: hidden; */
@@ -46,6 +75,7 @@ const props = defineProps({
   /* background-position: center; */
   /* padding: 0px; */
   /* margin: 0px; */
+  border-radius: 5px;
 }
 h2 {
   color: white;
