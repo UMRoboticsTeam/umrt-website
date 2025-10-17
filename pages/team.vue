@@ -58,6 +58,7 @@
       </p>
     </Section> -->
 
+    <!--
     <Section theme="dark" title="About the Subsystems">
       <p>The University of Manitoba Robotics Team's Subsystems section functions as the diverse nerve center 
         of our robotic initiatives. It's a collection of specialized units, each with its own unique role, 
@@ -69,22 +70,19 @@
 
         <div v-for="system in teamList['leads']" class="system-info col-xl-4 col-md-6">
           <i :class="`bi bi-${ system['icon'] }`"></i>
-          <!-- <div> -->
             <h4>{{ system['name'] }}</h4>
             <p>{{ system['description'] }}</p>
-          <!-- </div> -->
         </div>
       </div>
       <div class="row d-flex justify-content-center">
         <div v-for="system in teamList['subsystems']" class="system-info col-xl-4 col-md-6">
           <i :class="`bi bi-${ system['icon'] }`"></i>
-          <!-- <div> -->
             <h4>{{ system['name'] }}</h4>
             <p>{{ system['description'] }}</p>
-          <!-- </div> -->
         </div>
       </div>
     </Section>
+    -->
 
     <Section theme="light" class="page-section team">
       <!-- <div class="container px-4 px-lg-5"> -->

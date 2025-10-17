@@ -9,7 +9,7 @@
         <!-- <a class="navbar-brand" href="/">UofM Robotics Team</a> -->
         <!-- <a class="navbar-brand" href="/">UMRT</a> -->
         <a class="navbar-brand" href="/"><img :src="UMRTLogo" class="" style="height: 64px; padding: 0; margin: 0;"></a>
-
+        
         <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ms-auto my-2 my-lg-0">
@@ -103,7 +103,7 @@ html:is([data-scroll='1']) nav::before {
   color: #ffffff8c;
 
   /* border: none; */
-  min-width: 200px;
+  /* min-width: 200px; */
 }
 
 .dropdown:hover .dropdown-menu {

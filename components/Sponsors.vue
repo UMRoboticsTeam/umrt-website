@@ -3,7 +3,7 @@
     <h2 class="mt-0">Our Sponsors</h2>
     <hr class="divider divider-light" />
 
-    <div class="row row-cols-1 row-cols-lg-2 d-flex justify-content-center">
+    <div class="row row-cols-2 d-flex justify-content-center sponsor-list">
       <!-- =================================== -->
       <!-- ====== High Tier Sponsors ========= -->
       <!-- =================================== -->
@@ -13,18 +13,18 @@
       <!-- Friends of Engineering -->
       <Sponsor :imgSrc="LOGO_FOE" />
       <!-- PTX Trimble -->
-      <Sponsor :imgSrc="LOGO_PTX" href="https://www.ptxtrimble.com/" tooltip="PTX Trimble Website" />
+      <Sponsor :imgSrc="LOGO_PTX" href="https://www.ptxtrimble.com/" tooltip="PTX Trimble" />
       <!-- G3 -->
       <Sponsor :imgSrc="LOGO_G3" href="https://www.g3.ca/" tooltip="G3 Website" />
       <!-- MacDon -->
-      <Sponsor :imgSrc="LOGO_MD" href="https://www.macdon.com/" tooltip="MacDon Website" />
+      <Sponsor :imgSrc="LOGO_MD" href="https://www.macdon.com/" tooltip="MacDon" />
       <!-- Big Deal Custom Cases -->
-      <Sponsor :imgSrc="LOGO_BDCC" href="https://bigdealcases.com/" tooltip="Big Deal Custom Cases Website"/>
+      <Sponsor :imgSrc="LOGO_BDCC" href="https://bigdealcases.com/" tooltip="Big Deal Custom Cases"/>
 
 
     </div>
     <hr class="divider divider-light" />
-    <div class="row row-cols-2 row-cols-lg-4 d-flex justify-content-center">
+    <div class="row row-cols-3 row-cols-lg-4 d-flex justify-content-center sponsor-list">
       <!-- =================================== -->
       <!-- ======== Medium Tier Sponsors ===== -->
       <!-- =================================== -->
@@ -42,7 +42,7 @@
       
     </div>
     <hr class="divider divider-light" />
-    <div class="row row-cols-3 row-cols-lg-6 d-flex justify-content-center">
+    <div class="row row-cols-4 row-cols-lg-6 d-flex justify-content-center sponsor-list">
       <!-- =================================== -->
       <!-- ======= Low Tier Sponsors ========= -->
       <!-- =================================== -->
@@ -90,5 +90,7 @@
 </script>
 
 <style scoped>
-
+.sponsor-list {
+  padding: 10px;
+}
 </style>

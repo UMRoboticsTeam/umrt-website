@@ -3,6 +3,7 @@
   <!-- <section v-if="!img" class="page-section" :style="sectionStyle"> -->
   <section class="page-section" :style="sectionStyle">
     <div class="container px-0">
+    <!-- <div class="px-0"> -->
       <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-lg-20 text-center">
           <h2 v-if="title" class="mt-0">{{ title }}</h2>
