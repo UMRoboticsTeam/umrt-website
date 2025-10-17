@@ -189,7 +189,8 @@
 <script setup>
   // import { filename } from 'pathe/utils'
 
-  import HeroImg from "@/assets/images/TeamPhoto-2.jpg"
+  // import HeroImg from "@/assets/images/TeamPhoto-2.jpg"
+  import HeroImg from "@/assets/images/teamphoto-2425-1.jpg"
   import Section from "~/components/Section.vue"
   import TeamMember from "~/components/TeamMember.vue"
 
