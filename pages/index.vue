@@ -21,7 +21,7 @@
         <!-- <h1>Heyo this is my page</h1> -->
         <Section theme="light" title="About Us" id="about">
           <p>
-            UMRT - The University of Manitoba Robotics Team is an ambitious group of students interested in competing in the Canadian International Rover Challenge 2024! Our disciplines range from Computer Vision, Mechanical Engineering, Electrical Engineering, Embedded Systems, Wireless Communications, and Pedology. We have a lot of plans for the future along with other types of events such as workshops, open competitions, and more!
+            The University of Manitoba Robotics Team (UMRT) is an ambitious group of students interested in competing in the Canadian International Rover Challenge (CIRC). Our disciplines range from Computer Vision, Mechanical Engineering, Electrical Engineering, Embedded Systems, Wireless Communications, and Pedology. We have a lot of plans for the future along with other types of events such as workshops, open competitions, and more!
             <br><br>
             Feel free to contact us at exec.umrt@gmail.com for any questions or inquiries.
           </p>
@@ -152,7 +152,8 @@
   import Section from '~/components/Section.vue'
   import Sponsors from '~/components/Sponsors.vue'
   import Socials from '~/components/Socials.vue'
-  import HeroImg from '@/assets/images/TeamPhoto-3.jpg'
+  // import HeroImg from '@/assets/images/TeamPhoto-3.jpg'
+  import HeroImg from '@/assets/images/teamphoto-2425-1.jpg'
 
   import Carousel from "~/components/Carousel.vue"
 

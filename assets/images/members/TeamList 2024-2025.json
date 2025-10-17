@@ -1,0 +1,220 @@
+{
+  "exec_team":[
+    {
+      "name":"Minjeong Kang",
+      "role":"President",
+      "description":"",
+      "image":"M.Kang_750.jpg",
+      "socials":{
+        "linkedin":"https://www.linkedin.com/in/minjeong-kang-96ab431b2/",
+        "instagram":"https://www.instagram.com/unikwinpink"
+      }
+    },
+    {
+      "name":"Kevin Burston",
+      "role":"Vice President",
+      "description":"",
+      "image":"K.Burston_750.jpg",
+      "socials":{
+
+      }
+    },
+    {
+      "name":"Mai Bui",
+      "role":"Secretary",
+      "description":"",
+      "image":"M.Bui_750.jpg",
+      "socials":{
+        
+      }
+    },
+    {
+      "name":"Connor Pagtakhan",
+      "role":"Treasurer",
+      "description":"",
+      "image":"C.Pagtakhan.jpg",
+      "socials":{
+        "linkedin":"https://www.linkedin.com/in/connor-pagtakhan-5a617b206/",
+        "instagram":"https://www.instagram.com/cpagtakhan/"
+      }
+    },
+    {
+      "name":"Kate Lacerna",
+      "role":"Events Director",
+      "description":"",
+      "image":"K.Lacerna_750.jpg",
+      "socials":{
+
+      }
+    },
+    {
+      "name":"Sydney Povey",
+      "role":"Creatives Director",
+      "description":"",
+      "image":"S.Povey_750.jpg",
+      "socials":{
+        
+      }
+    },
+    {
+      "name":"Edcel Abanto",
+      "role":"Team Lead",
+      "description":"",
+      "image":"E.Abanto_750.jpg",
+      "socials":{
+        "linkedin":"https://www.linkedin.com/in/edcel-abanto-88695b2a8/"
+      }
+    }
+  ],
+  "leads":[
+    {
+      "name":"System Lead",
+      "description":"The System Lead is responsible for overseeing the integration and management of all subsystems. They ensure that each subsystem functions correctly on its own and integrates properly with the others to form a complete cohesive system.",
+      "image":"subsystem-lead.jpg",
+      "icon":"pencil-square",
+      "leads":[
+        {
+          "name":"Edcel Abanto",
+          "role":"Team Lead",
+          "description":"",
+          "image":"E.Abanto_750.jpg",
+          "socials":{
+            "linkedin":"https://www.linkedin.com/in/edcel-abanto-88695b2a8/"
+          }
+        }
+      ]
+    }
+  ],
+  "subsystems":[
+    {
+      "name":"Embedded",
+      "description":"Interfacing hardware with software, designing circuit boards, and working on control systems.",
+      "image":"subsystem-embedded.jpg",
+      "icon":"cpu",
+      "leads":[
+        {
+          "name":"Niko Christie",
+          "role":"Embedded Co-Lead",
+          "description":"",
+          "image":"blank-head.jpg",
+          "socials":{
+            "linkedin":"https://www.linkedin.com/in/nikolaas-christie-3310452a3/"
+          }
+        },
+        {
+          "name":"Ernest Gonzales",
+          "role":"Embedded Co-Lead",
+          "description":"",
+          "image":"blank-head.jpg",
+          "socials":{
+            "linkedin":"https://www.linkedin.com/in/ernest-reign-gonzales-1807a318b/"
+          }
+        }
+      ]
+    },
+    {
+      "name":"Communication Operations",
+      "description":"The link between the robot and its pilot. Responsible for designing systems that keep team members informed of the robot's state and health.",
+      "image":"subsystem-communications.jpg",
+      "icon":"broadcast-pin",
+      "leads":[
+        {
+          "name":"Kevin Burston",
+          "role":"Comm-Ops Co-Lead",
+          "description":"",
+          "image":"K.Burston_750.jpg",
+          "socials":{
+            
+          }
+        },
+        {
+          "name":"Connor Pagtakhan",
+          "role":"Comm-Ops Co-Lead",
+          "description":"",
+          "image":"C.Pagtakhan.jpg",
+          "socials":{
+            "linkedin":"https://www.linkedin.com/in/connor-pagtakhan-5a617b206/",
+            "instagram":"https://www.instagram.com/cpagtakhan/"
+          }
+        }
+      ]
+    },
+    {
+      "name":"Electrical",
+      "description":"Design of the system that connects the other subsystems with power, communications, and control.",
+      "image":"subsystem-electrical.jpg",
+      "icon":"lightning-fill",
+      "leads":[
+        {
+          "name":"Jonah St. Hilaire",
+          "role":"Electrical Lead",
+          "description":"",
+          "image":"J.StHilaire_750.jpg",
+          "socials":{
+            
+          }
+        }
+      ]
+    },
+    {
+      "name":"Chassis",
+      "description":"Designs and manufactures the structure the robot is based upon. It has the role of keeping other subsystems safe from damage, moving payloads from point A to point B, and acting as a platform for prototyping and development.",
+      "image":"subsystem-chassis.jpg",
+      "icon":"box",
+      "leads":[
+        {
+          "name":"Matthew Nutbean",
+          "role":"Chassis System Lead",
+          "description":"",
+          "image":"M.Nutbean_750.jpg",
+          "socials":{
+            "linkedin": "https://www.linkedin.com/in/matthew-nutbean-6bb479306/"
+          }
+        }
+      ]
+    },
+    {
+      "name":"Robotic Arm",
+      "description":"Designs the primary payload of the robot. This payload is used as a platform for secondary payloads, and allows the robot to grab, move, and manipulate the world around it.",
+      "image":"subsystem-robotic-arm.jpg",
+      "icon":"wrench",
+      "leads":[
+        {
+          "name":"Anna Kulchycki",
+          "role":"Robotic Arm System Lead",
+          "description":"",
+          "image":"A.Kulchycki_750.jpg",
+          "socials":{
+            "linkedin":"https://www.linkedin.com/in/anna-kulchycki-448125225/"
+          }
+        },
+        {
+          "name":"Noah Reeder",
+          "role":"Robotic Arm Software Lead",
+          "description":"",
+          "image":"N.Reeder_750.jpg",
+          "socials":{
+            "linkedin":"https://www.linkedin.com/in/noah-reeder-b09686189/"
+          }
+        }
+      ]
+    },
+    {
+      "name":"Mission Control",
+      "description":"Designs, experiments with, and automates systems on the robot. It interfaces with the systems peripherals including cameras and sensors.",
+      "image":"subsystem-payload.jpg",
+      "icon":"archive-fill",
+      "leads":[
+        {
+          "name":"Spencer Molly",
+          "role":"Mission Control Lead",
+          "description":"",
+          "image":"S.Molly_750.jpg",
+          "socials":{
+            
+          }
+        }
+      ]
+    }
+  ]
+}

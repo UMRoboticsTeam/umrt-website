@@ -46,9 +46,9 @@
             <!-- <td>11th</td> -->
           </tr>
           <tr>
-            <!-- <th scope="row">August 8-11, 2025</th> -->
+            <th scope="row">August 8-11, 2025</th>
             <!-- <td>Canadian International Rover Competition</td> -->
-            <!-- <td><a href="https://circ.cstag.ca/2025/">Canadian International Rover Competition 2025</a></td> -->
+            <td><a href="https://circ.cstag.ca/2025/">Canadian International Rover Competition 2025</a></td>
             <!-- <td>...</td> -->
           </tr>
         </tbody>

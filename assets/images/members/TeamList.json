@@ -1,69 +1,60 @@
 {
   "exec_team":[
     {
-      "name":"Minjeong Kang",
+      "name":"Sydney Povey",
       "role":"President",
       "description":"",
-      "image":"M.Kang_750.jpg",
-      "socials":{
-        "linkedin":"https://www.linkedin.com/in/minjeong-kang-96ab431b2/",
-        "instagram":"https://www.instagram.com/unikwinpink"
-      }
+      "image":"S.Povey.jpg",
+      "socials":{}
     },
     {
-      "name":"Kevin Burston",
+      "name":"Edcel Abanto",
       "role":"Vice President",
       "description":"",
-      "image":"K.Burston_750.jpg",
-      "socials":{
-
-      }
+      "image":"E.Abanto.jpg",
+      "socials":{}
     },
     {
       "name":"Mai Bui",
       "role":"Secretary",
       "description":"",
-      "image":"M.Bui_750.jpg",
-      "socials":{
-        
-      }
+      "image":"M.Bui.jpg",
+      "socials":{}
     },
     {
-      "name":"Connor Pagtakhan",
+      "name":"Noah Paulicelli",
       "role":"Treasurer",
       "description":"",
-      "image":"C.Pagtakhan.jpg",
-      "socials":{
-        "linkedin":"https://www.linkedin.com/in/connor-pagtakhan-5a617b206/",
-        "instagram":"https://www.instagram.com/cpagtakhan/"
-      }
+      "image":"N.Paulicelli.jpg",
+      "socials":{}
+    },
+    {
+      "name":"Spencer Molloy",
+      "role":"Sponsorship Director",
+      "description":"",
+      "image":"S.Molloy.jpg",
+      "socials":{}
     },
     {
       "name":"Kate Lacerna",
       "role":"Events Director",
       "description":"",
-      "image":"K.Lacerna_750.jpg",
-      "socials":{
-
-      }
+      "image":"K.Lacerna.jpg",
+      "socials":{}
     },
     {
-      "name":"Sydney Povey",
+      "name":"Khan Ayaan",
       "role":"Creatives Director",
       "description":"",
-      "image":"S.Povey_750.jpg",
-      "socials":{
-        
-      }
+      "image":"K.Ayaan.jpg",
+      "socials":{}
     },
     {
-      "name":"Edcel Abanto",
+      "name":"Noah Reeder",
       "role":"Team Lead",
       "description":"",
-      "image":"E.Abanto_750.jpg",
-      "socials":{
-        "linkedin":"https://www.linkedin.com/in/edcel-abanto-88695b2a8/"
-      }
+      "image":"N.Reeder.jpg",
+      "socials":{}
     }
   ],
   "leads":[
@@ -74,13 +65,11 @@
       "icon":"pencil-square",
       "leads":[
         {
-          "name":"Edcel Abanto",
+          "name":"Noah Reeder",
           "role":"Team Lead",
           "description":"",
-          "image":"E.Abanto_750.jpg",
-          "socials":{
-            "linkedin":"https://www.linkedin.com/in/edcel-abanto-88695b2a8/"
-          }
+          "image":"N.Reeder.jpg",
+          "socials":{}
         }
       ]
     }
@@ -93,22 +82,18 @@
       "icon":"cpu",
       "leads":[
         {
-          "name":"Niko Christie",
-          "role":"Embedded Co-Lead",
+          "name":"Edcel Abanto",
+          "role":"Embedded Co-Lead (ROS)",
           "description":"",
-          "image":"blank-head.jpg",
-          "socials":{
-            "linkedin":"https://www.linkedin.com/in/nikolaas-christie-3310452a3/"
-          }
+          "image":"E.Abanto.jpg",
+          "socials":{}
         },
         {
           "name":"Ernest Gonzales",
-          "role":"Embedded Co-Lead",
+          "role":"Embedded Co-Lead (Controller)",
           "description":"",
-          "image":"blank-head.jpg",
-          "socials":{
-            "linkedin":"https://www.linkedin.com/in/ernest-reign-gonzales-1807a318b/"
-          }
+          "image":"E.Gonzales.jpg",
+          "socials":{}
         }
       ]
     },
@@ -119,23 +104,11 @@
       "icon":"broadcast-pin",
       "leads":[
         {
-          "name":"Kevin Burston",
-          "role":"Comm-Ops Co-Lead",
-          "description":"",
-          "image":"K.Burston_750.jpg",
-          "socials":{
-            
-          }
-        },
-        {
           "name":"Connor Pagtakhan",
-          "role":"Comm-Ops Co-Lead",
+          "role":"Comm-Ops Lead",
           "description":"",
           "image":"C.Pagtakhan.jpg",
-          "socials":{
-            "linkedin":"https://www.linkedin.com/in/connor-pagtakhan-5a617b206/",
-            "instagram":"https://www.instagram.com/cpagtakhan/"
-          }
+          "socials":{}
         }
       ]
     },
@@ -147,12 +120,17 @@
       "leads":[
         {
           "name":"Jonah St. Hilaire",
-          "role":"Electrical Lead",
+          "role":"Electrical Sr. Lead",
           "description":"",
-          "image":"J.StHilaire_750.jpg",
-          "socials":{
-            
-          }
+          "image":"J.StHilaire.jpg",
+          "socials":{}
+        },
+        {
+          "name":"Quinn Gibbons",
+          "role":"Electrical Jr. Lead",
+          "description":"",
+          "image":"Q.Gibbons.jpg",
+          "socials":{}
         }
       ]
     },
@@ -163,13 +141,18 @@
       "icon":"box",
       "leads":[
         {
-          "name":"Matthew Nutbean",
-          "role":"Chassis System Lead",
+          "name":"Adan Akmal",
+          "role":"Chassis Co-Lead",
           "description":"",
-          "image":"M.Nutbean_750.jpg",
-          "socials":{
-            "linkedin": "https://www.linkedin.com/in/matthew-nutbean-6bb479306/"
-          }
+          "image":"A.Akmal.jpg",
+          "socials":{}
+        },
+        {
+          "name":"Khan Ayaan",
+          "role":"Chassis Co-Lead",
+          "description":"",
+          "image":"K.Ayaan.jpg",
+          "socials":{}
         }
       ]
     },
@@ -180,22 +163,18 @@
       "icon":"wrench",
       "leads":[
         {
-          "name":"Anna Kulchycki",
-          "role":"Robotic Arm System Lead",
+          "name":"Ghrum Yemessghen",
+          "role":"Robotic Arm Co-Lead (Mechanical)",
           "description":"",
-          "image":"A.Kulchycki_750.jpg",
-          "socials":{
-            "linkedin":"https://www.linkedin.com/in/anna-kulchycki-448125225/"
-          }
+          "image":"G.Yemessghen.jpg",
+          "socials":{}
         },
         {
-          "name":"Noah Reeder",
-          "role":"Robotic Arm Software Lead",
+          "name":"Quinn Thiessen",
+          "role":"Robotic Arm Co-Lead (Software)",
           "description":"",
-          "image":"N.Reeder_750.jpg",
-          "socials":{
-            "linkedin":"https://www.linkedin.com/in/noah-reeder-b09686189/"
-          }
+          "image":"Q.Thiessen.jpg",
+          "socials":{}
         }
       ]
     },
@@ -206,13 +185,11 @@
       "icon":"archive-fill",
       "leads":[
         {
-          "name":"Spencer Molly",
+          "name":"Spencer Molloy",
           "role":"Mission Control Lead",
           "description":"",
-          "image":"S.Molly_750.jpg",
-          "socials":{
-            
-          }
+          "image":"S.Molloy.jpg",
+          "socials":{}
         }
       ]
     }

@@ -1,9 +1,56 @@
 <template>
   <div>
     <Hero title="Archive" :imgSrc="HeroImg"/>
+    <Section theme="light">
+      <h2 class="text-center mt-0">2024-2025</h2>
+      <hr class="divider" />
+      <p>
+        The 2024-2025 team was the first official year as a technical society of the University of Manitoba Engineering Society.
+        This year continued to expand to create a strong community by participating in many outreach events, workshops, and participating in CIRC 2025.
+      </p>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Role</th>
+              <th>Member</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>President</td><td>Minjeong Kang</td></tr>
+            <tr><td>Vice President</td><td>Kevin Burston</td></tr>
+            <tr><td>Secretary</td><td>Mai Bui</td></tr>
+            <tr><td>Treasurer/Webmaster</td><td>Connor Pagtakhan</td></tr>
+            <tr><td>Events Director</td><td>Kate Lacerna</td></tr>
+            <tr><td>Creatives Director</td><td>Sydney Povey</td></tr>
+
+            <tr><td>System Lead</td><td>Edcel Abanto</td></tr>
+            <tr><td>Embedded Leads</td><td>Niko Christie, Ernest Gonzales</td></tr>
+            <tr><td>Communications Leads</td><td>Kevin Burston, Connor Pagtakhan</td></tr>
+            <tr><td>Electrical Lead</td><td>Jonah St. Hilaire</td></tr>
+            <tr><td>Chassis Lead</td><td>Matthew Nutbean</td></tr>
+            <tr><td>Robotic Arm Leads</td><td>Anna Kulchycki, Noah Reeder</td></tr>
+            <tr><td>Mission Control Lead</td><td>Spencer Molly</td></tr>
+          </tbody>
+        </table>
+
+        
+      </div>
+      <div class="members-list">
+        <h4>Members</h4>
+        <div class="list">
+          Syed Abraham Ahmed, Minjeong Kang, Connor Pagtakhan, Kevin Burston,
+          Mai Bui, Sydney Povey, Niko Christie, Ernest Gonzales, Joshua Bond, Vuk Roca,
+          Matthew Nutbean, Graham Nash, Noah Reeder, Edcel Abanto, Ghrum Yemessghen, Anna Kulchycki,
+          Quinn Thiessen, Kate Lacerna, Spencer Molloy, Jonah St. Hilaire, Quinn Gibbons,
+          Che Carby, Khan Ayaan, Adan Akmal, Yuvraj Singh
+        </div>
+      </div>
+    </Section>
     <Section theme="dark">
       <h2 class="text-center mt-0">2023-2024</h2>
       <hr class="divider" />
+      <img class="team-photo" :src="team_2023_2024"></img>
       <p>The 2023-2024 team was the first team of UMRT, founded by Syed Abraham Ahmed and Minjeong Kang. 
         In their inaugural year, the team successfully built a fully functional rover to compete in the 
         2024 Canadian International Rover Challenge (CIRC). Their journey marked a significant milestone 
@@ -89,10 +136,15 @@ td {
   text-justify: inter-word;
   text-align-last: center;
 }
+.team-photo {
+  width: 500px;
+  min-width: 50%;
+}
 </style>
   
 <script setup>
 import HeroImg from "@/assets/images/TeamPhoto-2.jpg"
+import team_2023_2024 from "@/assets/images/TeamPhoto-2.jpg"
 import Section from "~/components/Section.vue"
 
 // definePageMeta({
