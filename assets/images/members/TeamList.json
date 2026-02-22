@@ -119,15 +119,8 @@
       "icon":"lightning-fill",
       "leads":[
         {
-          "name":"Jonah St. Hilaire",
-          "role":"Electrical Sr. Lead",
-          "description":"",
-          "image":"J.StHilaire.jpg",
-          "socials":{}
-        },
-        {
           "name":"Quinn Gibbons",
-          "role":"Electrical Jr. Lead",
+          "role":"Electrical Lead",
           "description":"",
           "image":"Q.Gibbons.jpg",
           "socials":{}
