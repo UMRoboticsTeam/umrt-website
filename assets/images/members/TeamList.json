@@ -5,7 +5,8 @@
       "role":"President",
       "description":"",
       "image":"S.Povey.jpg",
-      "socials":{}
+      "socials":{},
+      "typeIcon":"bi-award"
     },
     {
       "name":"Edcel Abanto",
@@ -19,42 +20,48 @@
       "role":"Secretary",
       "description":"",
       "image":"M.Bui.jpg",
-      "socials":{}
+      "socials":{},
+      "typeIcon":"bi-pencil-square"
     },
     {
       "name":"Noah Paulicelli",
       "role":"Treasurer",
       "description":"",
       "image":"N.Paulicelli.jpg",
-      "socials":{}
+      "socials":{},
+      "typeIcon":"bi-currency-dollar"
     },
     {
       "name":"Spencer Molloy",
       "role":"Sponsorship Director",
       "description":"",
       "image":"S.Molloy.jpg",
-      "socials":{}
+      "socials":{},
+      "typeIcon":"bi-megaphone"
     },
     {
       "name":"Kate Lacerna",
       "role":"Events Director",
       "description":"",
       "image":"K.Lacerna.jpg",
-      "socials":{}
+      "socials":{},
+      "typeIcon":"bi-easel"
     },
     {
       "name":"Khan Ayaan",
       "role":"Creatives Director",
       "description":"",
       "image":"K.Ayaan.jpg",
-      "socials":{}
+      "socials":{},
+      "typeIcon":"bi-palette"
     },
     {
       "name":"Noah Reeder",
       "role":"Team Lead",
       "description":"",
       "image":"N.Reeder.jpg",
-      "socials":{}
+      "socials":{},
+      "typeIcon":"bi-clipboard-check"
     }
   ],
   "leads":[
@@ -69,7 +76,8 @@
           "role":"Team Lead",
           "description":"",
           "image":"N.Reeder.jpg",
-          "socials":{}
+          "socials":{},
+          "typeIcon":"bi-clipboard-check"
         }
       ]
     }
@@ -86,14 +94,16 @@
           "role":"Embedded Co-Lead (ROS)",
           "description":"",
           "image":"E.Abanto.jpg",
-          "socials":{}
+          "socials":{},
+          "typeIcon":"bi-cpu"
         },
         {
           "name":"Ernest Gonzales",
           "role":"Embedded Co-Lead (Controller)",
           "description":"",
           "image":"E.Gonzales.jpg",
-          "socials":{}
+          "socials":{},
+          "typeIcon":"bi-cpu"
         }
       ]
     },
@@ -108,7 +118,8 @@
           "role":"Comm-Ops Lead",
           "description":"",
           "image":"C.Pagtakhan.jpg",
-          "socials":{}
+          "socials":{},
+          "typeIcon":"bi-wifi"
         }
       ]
     },
@@ -123,7 +134,8 @@
           "role":"Electrical Lead",
           "description":"",
           "image":"Q.Gibbons.jpg",
-          "socials":{}
+          "socials":{},
+          "typeIcon":"bi-lightning-charge"
         }
       ]
     },
@@ -138,14 +150,16 @@
           "role":"Chassis Co-Lead",
           "description":"",
           "image":"A.Akmal.jpg",
-          "socials":{}
+          "socials":{},
+          "typeIcon":"bi-gear"
         },
         {
           "name":"Khan Ayaan",
           "role":"Chassis Co-Lead",
           "description":"",
           "image":"K.Ayaan.jpg",
-          "socials":{}
+          "socials":{},
+          "typeIcon":"bi-gear"
         }
       ]
     },
@@ -160,14 +174,16 @@
           "role":"Robotic Arm Co-Lead (Mechanical)",
           "description":"",
           "image":"G.Yemessghen.jpg",
-          "socials":{}
+          "socials":{},
+          "typeIcon":"bi-hammer"
         },
         {
           "name":"Quinn Thiessen",
           "role":"Robotic Arm Co-Lead (Software)",
           "description":"",
           "image":"Q.Thiessen.jpg",
-          "socials":{}
+          "socials":{},
+          "typeIcon":"bi-hammer"
         }
       ]
     },
@@ -182,7 +198,8 @@
           "role":"Mission Control Lead",
           "description":"",
           "image":"S.Molloy.jpg",
-          "socials":{}
+          "socials":{},
+          "typeIcon":"bi-beaker"
         }
       ]
     }

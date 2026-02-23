@@ -1,20 +1,10 @@
 <template>
     <div>
-        <!-- <NuxtWelcome /> -->
-        <!-- <Hero title="University of Manitoba Robotics Team" :bgImgUrl=bgImg showLogo="true" /> -->
-        <!-- <Hero title="University of Manitoba Robotics Team" :imgSrc="HeroImg" showLogo="true" backgroundPosition="bottom"/> -->
-        <!-- <Hero title="" :imgSrc="HeroImg" showLogo="true" backgroundPosition="bottom">
-          <h1 class="text-white font-weight-bold">University of Manitoba</h1>
-          <h1 class="text-white font-weight-bold">Robotics Team</h1>
-        </Hero> -->
         <Hero title="" :imgSrc="HeroImg" backgroundPosition="bottom">
-          <!-- <h1 class="text-white" style="font-size: 2vw; font-weight: 100; text-shadow: 0px 0px 2rem #000e;">University of Manitoba</h1> -->
-          <!-- <h1 class="text-white" style="font-size: 6vw; font-weight: 100; text-shadow: 0px 0px 2rem #000e;">Robotics Team</h1> -->
 
           <h1 class="title">UNIVERSITY OF MANITOBA</h1>
           <h1 class="title bigger">ROBOTICS TEAM</h1>
-
-          <!-- <h1 class="text-white">Robotics Team</h1> -->
+          
         </Hero>
 
         

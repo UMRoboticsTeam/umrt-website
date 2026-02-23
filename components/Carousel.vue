@@ -1,122 +1,140 @@
 <template>
-
-
-  <div class="carousel">
-    <div class="carousel-ctrl d-flex align-items-center justify-content-between">
-      <div class="carousel-btn" @click="scrollLeft()"><i class="bi bi-caret-left-fill"></i></div>
-      <div class="carousel-btn" @click="scrollRight(1)"><i class="bi bi-caret-right-fill"></i></div>
+  <div class="carousel-wrapper" @mouseenter="pauseScroll" @mouseleave="startScroll">
+    <div class="carousel-ctrl">
+      <button class="ctrl-btn left" @click="scroll('left')">
+        <i class="bi bi-chevron-left"></i>
+      </button>
+      <button class="ctrl-btn right" @click="scroll('right')">
+        <i class="bi bi-chevron-right"></i>
+      </button>
     </div>
-  <div id="lightgallery" class="overflow-x-scroll overflow-y-hidden h-[160px] whitespace-nowrap no-scrollbar">
-    
-    <!-- <a v-for="path in Object.keys(glob)" :key="path" class="h-full" href="" target="."> -->
-    <a v-for="path in Object.keys(glob)" :key="path" class="h-full">
-      <img :src="images[path]" class="h-full" alt="" />
-    </a>
 
+    <div id="lightgallery" ref="galleryRef" class="gallery-container">
+      <div v-for="(imgUrl, path) in images" :key="path" class="gallery-item">
+        <img :src="imgUrl" alt="Showcase Image" />
+      </div>
+    </div>
   </div>
-  
-  </div>
-
-
 </template>
 
 <script setup>
-// const props = defineProps({
-//   imgPath: { type: String, required: true },
-// })
+import { ref, onMounted, onUnmounted } from 'vue';
 
-
-// requiring all photos from 
-const glob = import.meta.glob('@/assets/images/showcase/*.jpg', { eager: true })
-// const glob = import.meta.glob('@/assets/images/showcase/*(*.jpg|*.JPG)', { eager: true })
-// var glob = import.meta.glob('@/assets/images/showcase/*.JPG', { eager: true })
-
-// glob = {...glob, ...newGlob}
-// console.log("STARTING ONE")
-// console.log(glob)
-// console.log("STARTING TWO")
-// console.log(Object(glob))
-
-
-
+const glob = import.meta.glob('@/assets/images/showcase/*.jpg', { eager: true });
 const images = Object.fromEntries(
   Object.entries(glob).map(([key, value]) => [key, value.default])
-)
+);
 
+const galleryRef = ref(null);
+let scrollInterval = null;
 
+const scroll = (direction) => {
+  const el = galleryRef.value;
+  const scrollAmount = el.offsetWidth * 0.8;
+  if (direction === 'left') {
+    el.scrollLeft -= scrollAmount;
+    // If at start, loop to end
+    if (el.scrollLeft <= 0) el.scrollLeft = el.scrollWidth;
+  } else {
+    el.scrollLeft += scrollAmount;
+    // If at end, loop to start
+    if (el.scrollLeft >= el.scrollWidth - el.offsetWidth) el.scrollLeft = 0;
+  }
+};
 
+const startScroll = () => {
+  scrollInterval = setInterval(() => scroll('right'), 3000);
+};
 
+const pauseScroll = () => {
+  clearInterval(scrollInterval);
+};
 
+onMounted(() => {
+  startScroll();
+});
+
+onUnmounted(() => {
+  pauseScroll();
+});
 </script>
-<script>
-function scrollLeft() {
-  const gallery = document.getElementById('lightgallery')
-  gallery.scrollLeft -= gallery.offsetWidth * 0.5;
-}
-function scrollRight() {
-  const gallery = document.getElementById('lightgallery')
-  gallery.scrollLeft += gallery.offsetWidth * 0.5;
-}
-</script>
-
-
 
 <style scoped>
-.carousel {
-  display: flex;
-  padding: 0;
-
-
-  height: 300px;
-
-  /* border: 4px solid #000000; */
-  box-shadow: 0px 4px 20px 0px #000000;
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  box-shadow: 0px 10px 30px rgba(0,0,0,0.3);
+  background: #000;
+  overflow: hidden;
 }
 
-.carousel-ctrl {
-  width: 100%;
+.gallery-container {
+  display: flex;
   height: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  gap: 10px;
+  padding: 10px;
+}
 
+.gallery-container::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.gallery-item {
+  flex: 0 0 auto;
+  height: 100%;
+}
+
+.gallery-item img {
+  height: 100%;
+  width: auto;
+  border-radius: 4px;
+  transition: transform 0.3s;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.02);
+}
+
+/* Modern Floating Controls */
+.carousel-ctrl {
   position: absolute;
-
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 20;
   pointer-events: none;
 }
-.carousel-btn {
-  background-color: #00000080;
-  padding: 0px 2px;
-  height: 100%;
 
+.ctrl-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
   display: flex;
-  justify-content: center;
   align-items: center;
-
+  justify-content: center;
   cursor: pointer;
   pointer-events: all;
+  transition: all 0.3s;
+  opacity: 0; /* Hidden by default */
 }
 
-#lightgallery {
-  /* height: 160px; */
-  height: 100%;
-  display: flex;
-  overflow-y: hidden;
-  overflow-x: scroll;
-
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-
-  scroll-behavior: smooth;
-  
-  padding: 0;
-
-  background-color: #FF000000;
-}
-#lightgallery::-webkit-scrollbar {
-  display: none;
+.carousel-wrapper:hover .ctrl-btn {
+  opacity: 1; /* Show on hover */
 }
 
-
-.h-full {
-  height: 100%;
-  padding: 0px 2px;
+.ctrl-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(1.1);
 }
 </style>

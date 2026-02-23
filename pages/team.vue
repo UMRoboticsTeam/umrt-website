@@ -44,6 +44,7 @@
               :role="exec['role']" 
               :desc="exec['description']" 
               :socials="JSON.stringify(exec['socials'])"
+              :typeIcon="exec['typeIcon']"
               />
           </div>
         </div>
@@ -117,6 +118,7 @@
                 :role="exec['role']" 
                 :desc="exec['description']" 
                 :socials="JSON.stringify(exec['socials'])"
+                :typeIcon="exec['typeIcon']"
                 />
             <!-- </div> -->
           </TeamSystem>
@@ -134,6 +136,7 @@
                 :role="exec['role']" 
                 :desc="exec['description']" 
                 :socials="JSON.stringify(exec['socials'])"
+                :typeIcon="exec['typeIcon']"
                 />
             <!-- </div> -->
           </TeamSystem>
