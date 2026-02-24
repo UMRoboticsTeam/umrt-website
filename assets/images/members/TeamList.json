@@ -65,22 +65,6 @@
     }
   ],
   "leads":[
-    {
-      "name":"System Lead",
-      "description":"The System Lead is responsible for overseeing the integration and management of all subsystems. They ensure that each subsystem functions correctly on its own and integrates properly with the others to form a complete cohesive system.",
-      "image":"subsystem-lead.jpg",
-      "icon":"pencil-square",
-      "leads":[
-        {
-          "name":"Noah Reeder",
-          "role":"Team Lead",
-          "description":"",
-          "image":"N.Reeder.jpg",
-          "socials":{},
-          "typeIcon":"bi-clipboard-check"
-        }
-      ]
-    }
   ],
   "subsystems":[
     {
