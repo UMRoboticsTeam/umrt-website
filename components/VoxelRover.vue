@@ -1,0 +1,238 @@
+<template>
+  <div ref="container" class="voxel-wrapper">
+    <div ref="threeCanvas" class="voxel-container"></div>
+  </div>
+</template>
+
+<script setup>
+import { onMounted, ref, onBeforeUnmount } from 'vue';
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+
+const threeCanvas = ref(null);
+const container = ref(null);
+let scene, camera, renderer, frameId;
+let rover1, rover2;
+const environmentObjects = [];
+const particles = [];
+
+// Configuration
+const scrollSpeed = 0.06;
+const groundColor = 0xb85c38; 
+
+onMounted(() => {
+  // 1. Scene Setup
+  scene = new THREE.Scene();
+  // Match fog to the theme of your section background if possible
+  scene.fog = new THREE.Fog(0xd4a373, 15, 30);
+
+  // 2. Camera Setup
+  const width = container.value.clientWidth;
+  const height = container.value.clientHeight;
+  const aspect = width / height;
+  const d = 6;
+  camera = new THREE.OrthographicCamera(-d * aspect, d * aspect, d, -d, 1, 1000);
+  camera.position.set(10, 10, 10);
+  camera.lookAt(0, 0, 0);
+
+  // 3. Renderer Setup
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(width, height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap; // Softer shadows
+  threeCanvas.value.appendChild(renderer.domElement);
+
+  // 4. Lighting
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+  scene.add(ambientLight);
+
+  const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
+  dirLight.position.set(10, 20, 10);
+  dirLight.castShadow = true;
+  // Increase shadow quality and area
+  dirLight.shadow.camera.left = -10;
+  dirLight.shadow.camera.right = 10;
+  dirLight.shadow.camera.top = 10;
+  dirLight.shadow.camera.bottom = -10;
+  dirLight.shadow.mapSize.width = 1024;
+  dirLight.shadow.mapSize.height = 1024;
+  scene.add(dirLight);
+
+  // 5. Ground
+  const groundGeo = new THREE.PlaneGeometry(100, 100);
+  const canvas = document.createElement('canvas');
+  canvas.width = 64; canvas.height = 64;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#b85c38'; ctx.fillRect(0, 0, 64, 64);
+  ctx.strokeStyle = '#a14a2a'; ctx.lineWidth = 2;
+  ctx.strokeRect(0, 0, 64, 64);
+  
+  const groundTex = new THREE.CanvasTexture(canvas);
+  groundTex.wrapS = groundTex.wrapT = THREE.RepeatWrapping;
+  groundTex.repeat.set(40, 40);
+
+  const groundMat = new THREE.MeshPhongMaterial({ map: groundTex });
+  const ground = new THREE.Mesh(groundGeo, groundMat);
+  ground.rotation.x = -Math.PI / 2;
+  ground.receiveShadow = true;
+  scene.add(ground);
+
+  // 6. Load Models with Shadow Support
+  const loader = new GLTFLoader();
+  const setupModel = (gltf, x, z) => {
+    const model = gltf.scene;
+    model.traverse((node) => {
+      if (node.isMesh) {
+        node.castShadow = true;
+        node.receiveShadow = true;
+      }
+    });
+    model.scale.set(1.5, 1.5, 1.5);
+    model.rotation.y = 3 * Math.PI / 2;
+    model.position.set(x, 0, z);
+    scene.add(model);
+    return model;
+  };
+
+  loader.load('/3d/prairie_pioneer.glb', (gltf) => { rover1 = setupModel(gltf, -2, 0); });
+  loader.load('/3d/project_perry.glb', (gltf) => { rover2 = setupModel(gltf, 2, -1.5); });
+
+  // 7. Environment Logic (Obstacles)
+  const createEnvironmentPiece = () => {
+    const isRock = Math.random() > 0.3;
+    const size = 0.2 + Math.random() * 0.6;
+    const geo = isRock ? new THREE.BoxGeometry(size, size * 0.6, size) : new THREE.BoxGeometry(0.2, size * 2, 0.2);
+    
+    // Randomize color variety
+    const color = isRock 
+      ? new THREE.Color().setHSL(0, 0, 0.3 + Math.random() * 0.2) // Greys
+      : new THREE.Color().setHSL(0.3, 0.4, 0.2 + Math.random() * 0.2); // Greens
+    
+    const mat = new THREE.MeshPhongMaterial({ color });
+    const mesh = new THREE.Mesh(geo, mat);
+    
+    // Spawn outside of lanes (Lanes are roughly -3 to 3)
+    const side = Math.random() > 0.5 ? 1 : -1;
+    const x = side * (4 + Math.random() * 6);
+    
+    mesh.position.set(x, isRock ? size/4 : size, 20); // Spawn at back
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    scene.add(mesh);
+    environmentObjects.push(mesh);
+  };
+
+  // 8. Dirt/Smoke Logic (from corners)
+  const createDirt = (rover, xOffset) => {
+    if (!rover) return;
+    const p = new THREE.Mesh(
+      new THREE.BoxGeometry(0.12, 0.12, 0.12),
+      new THREE.MeshPhongMaterial({ color: 0xa14a2a, transparent: true, opacity: 0.8 })
+    );
+    // Position at back wheels (Left or Right)
+    p.position.set(rover.position.x + xOffset + (Math.random() * 2 - 1) * 0.1, 0.1, rover.position.z - 1.2);
+    p.userData.life = 1.0;
+    scene.add(p);
+    particles.push(p);
+  };
+
+  // 9. Animation Loop
+  let time = 0;
+  const animate = () => {
+    frameId = requestAnimationFrame(animate);
+    time += 0.05;
+
+    groundTex.offset.y -= scrollSpeed / 2.5;
+
+    [rover1, rover2].forEach((r, i) => {
+      if (r) {
+        // Position Jostle
+        r.position.y = Math.abs(Math.sin(time * 0.3 + i)) * 0.12;
+        r.position.z += Math.sin(time * 0.3 + i) * 0.01;
+        
+        // Complex Rotation (Pitch and Roll)
+        r.rotation.x = Math.sin(time * 0.3 + i) * -0.02; // Pitch (nodding)
+        // r.rotation.z = Math.cos(time * 0.3 + i) * 0.02; // Roll (tilting)
+        
+        // Random vibration
+        r.position.x += (Math.random() - 0.5) * 0.02;
+        r.position.x = THREE.MathUtils.lerp(r.position.x, i === 0 ? -2 : 2, 0.1);
+
+        // Dirt from two back corners
+        if (Math.random() > 0.8) {
+          createDirt(r, -0.6); // Back leftish
+          createDirt(r, 0.6);  // Back rightish
+        }
+      }
+    });
+
+    // Move Environment
+    if (Math.random() > 0.96) createEnvironmentPiece();
+    for (let i = environmentObjects.length - 1; i >= 0; i--) {
+      const obj = environmentObjects[i];
+      obj.position.z -= scrollSpeed * 1;
+      if (obj.position.z < -20) {
+        scene.remove(obj);
+        environmentObjects.splice(i, 1);
+      }
+    }
+
+    // Move Dirt
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.position.z -= scrollSpeed * 0.8;
+      p.position.y += 0.01;
+      p.userData.life -= 0.02;
+      p.scale.setScalar(p.userData.life);
+      if (p.userData.life <= 0) {
+        scene.remove(p);
+        particles.splice(i, 1);
+      }
+    }
+
+    renderer.render(scene, camera);
+  };
+
+  animate();
+  window.addEventListener('resize', onWindowResize);
+});
+
+function onWindowResize() {
+  if (!container.value) return;
+  const width = container.value.clientWidth;
+  const height = container.value.clientHeight;
+  const aspect = width / height;
+  const d = 6;
+
+  camera.left = -d * aspect;
+  camera.right = d * aspect;
+  camera.top = d;
+  camera.bottom = -d;
+  camera.updateProjectionMatrix();
+  renderer.setSize(width, height);
+}
+
+onBeforeUnmount(() => {
+  cancelAnimationFrame(frameId);
+  window.removeEventListener('resize', onWindowResize);
+});
+</script>
+
+<style scoped>
+.voxel-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.voxel-container {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+</style>

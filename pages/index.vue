@@ -16,6 +16,11 @@
             Feel free to contact us at exec.umrt@gmail.com for any questions or inquiries.
           </p>
         </Section>
+        <Section theme="primary">
+          <VoxelRover />
+          <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+          <!-- brbrbrbruhhhhhh -->
+        </Section>
         <Section theme="dark" title="Competitions">
           <p>
             The University of Manitoba Robotics Team competes in the Canadian International Rover Competition (CIRC) held annually in Drumheller, AB, Canada.
