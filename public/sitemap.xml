@@ -2,31 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <!-- Homepage -->
     <url>
-        <loc>https://umrt.ca</loc>
+        <loc>https://umrt.ca/</loc>
         <lastmod>2025-03-15T00:00:00+00:00</lastmod>
         <priority>1.00</priority>
     </url>
     <!-- Team Page -->
     <url>
-        <loc>https://umrt.ca/team</loc>
+        <loc>https://umrt.ca/team/</loc>
         <lastmod>2025-03-15T00:00:00+00:00</lastmod>
         <priority>0.90</priority>
     </url>
     <!-- Competitions -->
     <url>
-        <loc>https://umrt.ca/competitions</loc>
+        <loc>https://umrt.ca/competitions/</loc>
         <lastmod>2025-03-15T00:00:00+00:00</lastmod>
         <priority>0.70</priority>
     </url>
     <!-- Sponsorships -->
     <url>
-        <loc>https://umrt.ca/sponsorships</loc>
+        <loc>https://umrt.ca/sponsorships/</loc>
         <lastmod>2025-03-15T00:00:00+00:00</lastmod>
         <priority>0.90</priority>
     </url>
     <!-- Archive -->
     <url>
-        <loc>https://umrt.ca/archive</loc>
+        <loc>https://umrt.ca/archive/</loc>
         <lastmod>2025-03-15T00:00:00+00:00</lastmod>
         <priority>0.80</priority>
     </url>

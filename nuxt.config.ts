@@ -5,6 +5,21 @@ export default defineNuxtConfig({
 
   modules: ['@nuxt/image'],
 
+
+  nitro: {
+    prerender: {
+      routes: [
+        '/about/',
+        '/archive/',
+        '/competitions/', 
+        // '/outreach/',
+        '/sponsorships/', 
+        '/team/', 
+      ],
+      crawlLinks: true
+    }
+  },
+
   css: [
     './assets/styles.css'
   ],  // imports in here so that it doesnt blink when refreshing
@@ -14,6 +29,7 @@ export default defineNuxtConfig({
   // ]
 
   app: {
+    buildAssetsDir: '/_nuxt/',
     head: {
       // link: [
       //   { rel: 'stylesheet', href: './assets/styles.css' }
