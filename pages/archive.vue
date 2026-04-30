@@ -4,6 +4,7 @@
     <Section theme="light">
       <h2 class="text-center mt-0">2024-2025</h2>
       <hr class="divider" />
+      <img class="team-photo" :src="team_2024_2025"></img>
       <p>
         The 2024-2025 team was the first official year as a technical society of the University of Manitoba Engineering Society.
         This year continued to expand to create a strong community by participating in many outreach events, workshops, and participating in CIRC 2025.
@@ -145,6 +146,7 @@ td {
 <script setup>
 import HeroImg from "@/assets/images/TeamPhoto-2.jpg"
 import team_2023_2024 from "@/assets/images/TeamPhoto-2.jpg"
+import team_2024_2025 from "@/assets/images/teamphoto-2425-1.jpg"
 import Section from "~/components/Section.vue"
 
 // definePageMeta({
