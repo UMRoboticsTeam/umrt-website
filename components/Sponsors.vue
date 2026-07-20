@@ -55,7 +55,8 @@
       <Sponsor :imgSrc="LOGO_SW" />
       <!-- Altium -->
       <Sponsor :imgSrc="LOGO_AL" />
-      
+      <!-- Foxglove -->
+      <Sponsor :imgSrc="LOGO_FG" />
     </div>
 
   </Section>
@@ -85,6 +86,7 @@
   import LOGO_OS from "@/assets/images/sponsors/onshape-logo-RGB_color_cropped.png"
   import LOGO_SW from "@/assets/images/sponsors/SolidWorks_RedOnTransparent.png"
   import LOGO_AL from "@/assets/images/sponsors/Altium_Logo_BLK.svg"
+  import LOGO_FG from "@/assets/images/sponsors/foxglove.svg"
 
 
 </script>

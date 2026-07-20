@@ -99,9 +99,17 @@
       "leads":[
         {
           "name":"Connor Pagtakhan",
-          "role":"Comm-Ops Lead",
+          "role":"Comm-Ops Co-Lead",
           "description":"",
           "image":"C.Pagtakhan.jpg",
+          "socials":{},
+          "typeIcon":"bi-wifi"
+        },
+        {
+          "name":"Domenic Chao",
+          "role":"Comm-Ops Co-Lead",
+          "description":"",
+          "image":"blank-head.jpg",
           "socials":{},
           "typeIcon":"bi-wifi"
         }
