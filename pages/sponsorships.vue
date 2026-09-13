@@ -3,7 +3,7 @@
     <Hero title="Sponsorships" :imgSrc="HeroImg"/>
     <Section theme="dark">
       <p>
-        We're currently seeking sponsors to support our inaugural venture into CIRC. 
+        We're currently seeking sponsors to support our venture with CIRC. 
         Your sponsorship will help fuel our project's success. Additionally, we graciously 
         accept software sponsorships and monetary contributions. Connect with us through our 
         email to discuss how you can be a part of our journey!
