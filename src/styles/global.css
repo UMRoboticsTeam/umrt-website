@@ -40,152 +40,6 @@ a {
   margin-inline: auto;
 }
 
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: rgba(6, 50, 96, 0.97);
-  color: white;
-  box-shadow: 0 2px 14px #0002;
-}
-
-.nav {
-  min-height: 68px;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  justify-content: space-between;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  text-decoration: none;
-  font-weight: 800;
-  letter-spacing: 0.03em;
-}
-
-.brand-mark {
-  width: 38px;
-  height: 38px;
-  border: 2px solid #fff;
-  border-radius: 8px;
-  display: grid;
-  place-items: center;
-  font-size: 0.7rem;
-}
-
-.nav-links {
-  display: flex;
-  gap: 0.25rem;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.nav-links a {
-  text-decoration: none;
-  padding: 0.55rem 0.7rem;
-  border-radius: 6px;
-  font-size: 0.92rem;
-}
-
-.nav-links a:hover,
-.nav-links a[aria-current="page"] {
-  background: #fff2;
-}
-
-.hero {
-  min-height: 62vh;
-  display: grid;
-  place-items: center;
-  color: #fff;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  background:
-    linear-gradient(
-      135deg,
-      #063260,
-      #182b42 65%,
-      #28292a
-    );
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--hero-image, none) center / cover no-repeat;
-  opacity: 0.32;
-}
-
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      to bottom,
-      #06326055,
-      #28292af2
-    );
-}
-
-.hero-content {
-  position: relative;
-  z-index: 1;
-  padding: 7rem 0 6rem;
-}
-
-.hero h1 {
-  margin: 0.25rem 0;
-  font-size: clamp(2.5rem, 7vw, 5.5rem);
-  line-height: 0.98;
-  text-shadow: 0.08em 0.08em #063260;
-}
-
-.hero p {
-  max-width: 720px;
-  margin: 1.25rem auto 0;
-  font-size: 1.15rem;
-  color: #eef5ff;
-}
-
-.section {
-  padding: 5rem 0;
-}
-
-.section.light {
-  background: #fff;
-}
-
-.section.dark {
-  background: var(--dark);
-  color: #fff;
-}
-
-.section.primary {
-  background: var(--primary);
-  color: #fff;
-}
-
-.section-heading {
-  text-align: center;
-  margin: 0 0 2rem;
-  font-size: clamp(2rem, 4vw, 3rem);
-}
-
-.section-heading::after {
-  content: "";
-  display: block;
-  width: 64px;
-  height: 4px;
-  margin: 0.7rem auto 0;
-  background: #5aa0e8;
-  border-radius: 999px;
-}
 
 .prose {
   max-width: 850px;
@@ -378,9 +232,9 @@ th {
     grid-template-columns: 1fr;
   }
 
-  .hero {
+  /* .hero {
     min-height: 55vh;
-  }
+  } */
 
   .section {
     padding: 3.5rem 0;

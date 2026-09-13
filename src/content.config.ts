@@ -5,7 +5,7 @@ import { z } from 'astro/zod';
 const sponsors = defineCollection({
   loader: glob({
     pattern: '**/*.md',
-    base: './src/sponsors',
+    base: './src/content/sponsors',
   }),
 
   schema: ({ image }) =>

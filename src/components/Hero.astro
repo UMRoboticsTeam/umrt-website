@@ -4,27 +4,174 @@ interface Props {
   subtitle?: string;
   imgSrc?: string;
   backgroundPosition?: string;
+  parallax?: boolean;
 }
 
 const {
   title = '',
   subtitle,
   imgSrc,
-  backgroundPosition = 'center'
+  backgroundPosition = 'center',
+  parallax = true,
 } = Astro.props;
-
-const image = imgSrc ? `url(${imgSrc})` : 'none';
 ---
 
 <section
-  class="hero"
-  style={`--hero-image:${image}; background-position:${backgroundPosition};`}
+  class:list={['hero', { 'hero--parallax': parallax }]}
+  data-parallax={parallax ? 'true' : 'false'}
 >
-  <div class="container hero-content">
-    <h1>{title}</h1>
+  <div class="hero-background" aria-hidden="true">
+    {imgSrc && (
+      <img
+        src={imgSrc}
+        alt=""
+        style={`object-position: ${backgroundPosition};`}
+        loading="eager"
+      />
+    )}
+  </div>
 
-    {subtitle && <p>{subtitle}</p>}
+  <div class="hero-overlay" aria-hidden="true"></div>
 
-    <slot />
+  <div class="masthead-holder">
+    <div class="container hero-container">
+      <div class="hero-content">
+          {title && <h1>{title}</h1>}
+          {subtitle && <p>{subtitle}</p>}
+          
+        <slot />
+      </div>
+    </div>
   </div>
 </section>
+
+<script>
+const heroes = document.querySelectorAll<HTMLElement>(
+  '.hero[data-parallax="true"]'
+);
+
+if (heroes.length) {
+  let ticking = false;
+
+  const updateParallax = () => {
+    heroes.forEach((hero) => {
+      const background =
+        hero.querySelector<HTMLElement>('.hero-background');
+
+      if (!background) return;
+
+      const offset = -hero.getBoundingClientRect().top / 3;
+      background.style.transform = `translate3d(0, ${offset}px, 0)`;
+    });
+
+    ticking = false;
+  };
+
+  const onScroll = () => {
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  };
+
+  updateParallax();
+  window.addEventListener('scroll', onScroll, { passive: true });
+}
+</script>
+
+<style>
+.hero {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  will-change: transform;
+}
+
+.hero-background img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(99, 109, 128, 0.7) 0%,
+    rgba(52, 58, 69, 0.9) 95%,
+    rgba(52, 58, 69, 1) 100%
+  );
+  pointer-events: none;
+}
+
+.masthead-holder {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7rem 1rem 6rem;
+}
+
+.hero-content {
+  width: 100%;
+}
+
+.hero h1 {
+  margin: 0.25rem 0;
+  color: #fff;
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  line-height: 0.98;
+  font-weight: 100;
+  text-shadow: 0.08em 0.08em #063260;
+}
+
+.hero p {
+  max-width: 720px;
+  margin: 1.25rem auto 0;
+  font-size: 1.15rem;
+  color: #eef5ff;
+}
+
+.hero :global(a),
+.hero :global(span) {
+  color: #fff;
+}
+
+@media (max-width: 800px) {
+  .hero-container {
+    padding: 5rem 1rem 4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-background {
+    transform: none !important;
+  }
+}
+</style>

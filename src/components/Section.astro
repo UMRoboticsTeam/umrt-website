@@ -19,3 +19,40 @@ const {
     <slot />
   </div>
 </section>
+
+<style>
+.section {
+  padding: 5rem 0;
+  text-align: center;
+}
+
+.section.light {
+  background: #fff;
+}
+
+.section.dark {
+  background: var(--dark);
+  color: #fff;
+}
+
+.section.primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.section-heading {
+  text-align: center;
+  margin: 0 0 2rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.section-heading::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 4px;
+  margin: 0.7rem auto 0;
+  background: #5aa0e8;
+  border-radius: 999px;
+}
+</style>
