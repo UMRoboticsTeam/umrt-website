@@ -1,0 +1,35 @@
+---
+import { navItems, socialLinks } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <h2>University of Manitoba Robotics Team</h2>
+      <p class="small">
+        Student-built robotics, competition, engineering, and outreach in
+        Winnipeg, Manitoba.
+      </p>
+    </div>
+
+    <div>
+      <h3>Pages</h3>
+
+      <div class="footer-links">
+        {navItems.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+      </div>
+    </div>
+
+    <div>
+      <h3>Connect</h3>
+
+      <div class="footer-links">
+        {socialLinks.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+</footer>

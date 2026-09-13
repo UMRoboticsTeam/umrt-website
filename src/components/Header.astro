@@ -1,0 +1,25 @@
+---
+import { navItems } from '../data/site';
+
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="/" aria-label="UMRT home">
+      <span class="brand-mark">UMRT</span>
+      <span>U of M Robotics Team</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary navigation">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          aria-current={current === item.href ? 'page' : undefined}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>

@@ -1,17 +1,81 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import Section from '../components/Section.astro';
+import { competitions } from '../data/content';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title="Competitions"
+  description="Competition information for UMRT."
+>
+  <PageIntro
+    title="Competitions"
+    description="UMRT's rover competition program and CIRC history."
+    image="/assets/images/CIRC-2024.svg"
+  />
+
+  <Section title="Canadian International Rover Competition">
+    <div class="prose">
+      <p>
+        UMRT currently competes in the Canadian International Rover
+        Competition (CIRC) in Drumheller, Alberta. CIRC is a post-secondary
+        student rover competition in which teams complete field,
+        autonomous-operation, manipulation, and mission-oriented challenges.
+      </p>
+
+      <div class="actions">
+        <a
+          class="btn btn-primary"
+          href="https://circ.cstag.ca/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          CIRC official website
+        </a>
+      </div>
+    </div>
+  </Section>
+
+  <Section theme="dark">
+    <div class="container">
+      <img
+        class="archive-photo"
+        src="/assets/images/circ-pano.svg"
+        alt="CIRC panorama placeholder"
+      />
+    </div>
+  </Section>
+
+  <Section title="Competition History">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Competition</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {
+            competitions.map((item) => (
+              <tr>
+                <th>{item.date}</th>
+                <td>
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {item.title}
+                  </a>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </Section>
+</Layout>

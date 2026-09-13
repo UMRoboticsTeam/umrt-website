@@ -1,17 +1,64 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import Section from '../components/Section.astro';
 
+const events = [
+  'Team presentations',
+  'Arduino workshops',
+  'Sumo bot development',
+  'Rover showcases'
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title="Outreach"
+  description="Outreach information for UMRT."
+>
+  <PageIntro
+    title="Outreach"
+    description="Robotics activities for students and community groups."
+    image="/assets/images/CIRC-2024.svg"
+  />
+
+  <Section theme="dark">
+    <div class="prose">
+      <p>
+        UMRT participates in outreach events aimed at middle-school and
+        high-school audiences. The existing program includes presentations,
+        Arduino workshops, sumo bot development, and rover showcases.
+      </p>
+    </div>
+  </Section>
+
+  <Section title="Activities">
+    <div class="grid grid-2">
+      {
+        events.map((event) => (
+          <article class="card">
+            <h3>{event}</h3>
+
+            <p>
+              Placeholder for format, duration, equipment requirements,
+              and booking information.
+            </p>
+          </article>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section
+    theme="light"
+    title="Contact Us"
+  >
+    <div class="prose">
+      <p>
+        If you would like to inquire about an outreach event, contact
+        <a href="mailto:exec.umrt@gmail.com">
+          exec.umrt@gmail.com
+        </a>.
+      </p>
+    </div>
+  </Section>
+</Layout>

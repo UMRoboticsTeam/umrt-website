@@ -1,17 +1,58 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import Section from '../components/Section.astro';
+import Sponsors from '../components/Sponsors.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title="Sponsorships"
+  description="Sponsorship information for UMRT."
+>
+  <PageIntro
+    title="Sponsorships"
+    description="Support student robotics at the University of Manitoba."
+    image="/assets/images/JCA_ROS_Event.svg"
+  />
+
+  <Section theme="dark">
+    <div class="prose">
+      <p>
+        UMRT seeks sponsors to support its rover competition program.
+        Sponsorship can include monetary contributions, software
+        sponsorships, equipment, services, or other in-kind support.
+      </p>
+
+      <p>
+        Contact
+        <a href="mailto:exec.umrt@gmail.com">
+          exec.umrt@gmail.com
+        </a>
+        to discuss sponsorship opportunities.
+      </p>
+    </div>
+  </Section>
+
+  <Sponsors />
+
+  <Section title="Sponsorship Information">
+    <div class="grid grid-3">
+      {
+        [
+          'Financial support',
+          'Software & tooling',
+          'Equipment & services'
+        ].map((item) => (
+          <article class="card">
+            <h3>{item}</h3>
+
+            <p>
+              Placeholder for package details, benefits,
+              recognition, and contact workflow.
+            </p>
+          </article>
+        ))
+      }
+    </div>
+  </Section>
+</Layout>

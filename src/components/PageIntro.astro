@@ -1,0 +1,21 @@
+---
+import Hero from './Hero.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title,
+  description,
+  image = '/assets/images/hero-placeholder.svg'
+} = Astro.props;
+---
+
+<Hero
+  title={title}
+  subtitle={description}
+  imgSrc={image}
+/>

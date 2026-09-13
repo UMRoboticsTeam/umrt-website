@@ -1,0 +1,21 @@
+---
+interface Props {
+  theme?: 'light' | 'dark' | 'primary';
+  title?: string;
+  id?: string;
+}
+
+const {
+  theme = 'light',
+  title,
+  id
+} = Astro.props;
+---
+
+<section id={id} class={`section ${theme}`}>
+  <div class="container">
+    {title && <h2 class="section-heading">{title}</h2>}
+
+    <slot />
+  </div>
+</section>

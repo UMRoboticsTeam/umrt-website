@@ -1,17 +1,69 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import Section from '../components/Section.astro';
+import { archiveYears } from '../data/content';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title="Archive"
+  description="Historical team information and archives for UMRT."
+>
+  <PageIntro
+    title="Archive"
+    description="Past UMRT teams, leadership, and member rosters."
+    image="/assets/images/TeamPhoto-2.svg"
+  />
+
+  {
+    archiveYears.map((archive, index) => (
+      <Section
+        theme={index % 2 ? 'dark' : 'light'}
+        title={archive.year}
+      >
+        <img
+          class="archive-photo"
+          src={archive.image}
+          alt={`${archive.year} team photo placeholder`}
+        />
+
+        <div class="prose">
+          <p>{archive.description}</p>
+        </div>
+
+        <div
+          class="table-wrap"
+          style="margin-top:2rem"
+        >
+          <table>
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Member</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {
+                archive.leaders.map(([role, member]) => (
+                  <tr>
+                    <th>{role}</th>
+                    <td>{member}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div
+          class="prose"
+          style="margin-top:2rem"
+        >
+          <h3>Members</h3>
+          <p>{archive.members}</p>
+        </div>
+      </Section>
+    ))
+  }
+</Layout>

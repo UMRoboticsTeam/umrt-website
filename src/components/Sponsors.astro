@@ -1,0 +1,140 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+
+const sponsorEntries = await getCollection('sponsors');
+
+const tiers = [
+  {
+    key: 'high',
+    label: 'High Tier',
+  },
+  {
+    key: 'med',
+    label: 'Medium Tier',
+  },
+  {
+    key: 'low',
+    label: 'Low Tier',
+  },
+] as const;
+---
+
+<section class="section light">
+  <div class="container">
+    <h2 class="section-heading">Sponsors & Partners</h2>
+
+    {
+      tiers.map((tier) => {
+        const sponsors = sponsorEntries.filter(
+          (sponsor) => sponsor.data.tier === tier.key
+        );
+
+        if (sponsors.length === 0) {
+          return null;
+        }
+
+        return (
+          <div class="sponsor-tier">
+            <h3 class="sponsor-tier-heading">
+              {tier.label}
+            </h3>
+
+            <div class="sponsor-grid">
+              {
+                sponsors.map((sponsor) => (
+                  <article class="sponsor-card">
+                    {sponsor.data.href ? (
+                      <a
+                        href={sponsor.data.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="sponsor-link"
+                        aria-label={sponsor.data.name}
+                      >
+                        <Image
+                          src={sponsor.data.logo}
+                          alt={sponsor.data.name}
+                          title={sponsor.data.name}
+                          class="sponsor-logo"
+                        />
+                      </a>
+                    ) : (
+                      <Image
+                        src={sponsor.data.logo}
+                        alt={sponsor.data.name}
+                        title={sponsor.data.name}
+                        class="sponsor-logo"
+                      />
+                    )}
+                  </article>
+                ))
+              }
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
+</section>
+
+<style>
+.sponsor-tier {
+  margin-top: 3rem;
+}
+
+.sponsor-tier:first-of-type {
+  margin-top: 0;
+}
+
+.sponsor-tier-heading {
+  text-align: center;
+  margin: 0 0 1.25rem;
+  font-size: 1.5rem;
+}
+
+.sponsor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.sponsor-card {
+  min-height: 160px;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  border: 1px solid #dfe5eb;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.sponsor-link {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.sponsor-logo {
+  display: block;
+  max-width: 100%;
+  max-height: 110px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 800px) {
+  .sponsor-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 500px) {
+  .sponsor-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

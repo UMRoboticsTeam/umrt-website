@@ -1,15 +1,73 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.astro";
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import Sponsors from '../components/Sponsors.astro';
+import RoverPlaceholder from '../components/RoverPlaceholder.astro';
 ---
 
 <Layout title="Home">
-
   <Hero
-    title="University of Manitoba Robotics Team"
-    imgSrc="/assets/images/teamPhoto-2.jpg"
-  />
+    title="UNIVERSITY OF MANITOBA"
+    imgSrc="/assets/teamPhoto-2.jpg"
+    backgroundPosition="bottom"
+  >
+    <h1>ROBOTICS TEAM</h1>
+  </Hero>
 
-  <!-- Rest of homepage -->
+  <Section
+    theme="light"
+    title="About Us"
+    id="about"
+  >
+    <div class="prose">
+      <p>
+        The University of Manitoba Robotics Team (UMRT) is an ambitious
+        group of students interested in competing in the Canadian
+        International Rover Challenge (CIRC). Our disciplines range from
+        Computer Vision, Mechanical Engineering, Electrical Engineering,
+        Embedded Systems, Wireless Communications, and Pedology.
+      </p>
 
+      <p>
+        We also plan workshops, open competitions, outreach events, and
+        other activities that make robotics accessible to students.
+      </p>
+
+      <p>
+        Contact
+        <a href="mailto:exec.umrt@gmail.com">
+          exec.umrt@gmail.com
+        </a>
+        for questions or inquiries.
+      </p>
+    </div>
+  </Section>
+
+  <Section theme="primary">
+    <RoverPlaceholder />
+  </Section>
+
+  <Section
+    theme="dark"
+    title="Competitions"
+  >
+    <div class="prose">
+      <p>
+        UMRT competes in the Canadian International Rover Competition
+        (CIRC), held annually in Drumheller, Alberta.
+      </p>
+
+      <div class="actions">
+        <a
+          class="btn btn-light"
+          href="/competitions"
+        >
+          View competitions
+        </a>
+      </div>
+    </div>
+  </Section>
+
+  <Sponsors />
 </Layout>

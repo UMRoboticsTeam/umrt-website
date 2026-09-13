@@ -1,0 +1,22 @@
+---
+interface Props {
+  name: string;
+  description: string;
+}
+
+const {
+  name,
+  description
+} = Astro.props;
+---
+
+<article class="card">
+  <h3>{name}</h3>
+
+  <p>{description}</p>
+
+  <p class="small">
+    Lead/member roster to be populated in
+    <code>src/data/content.ts</code>.
+  </p>
+</article>

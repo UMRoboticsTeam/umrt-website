@@ -1,17 +1,84 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import Section from '../components/Section.astro';
+import TeamMember from '../components/TeamMember.astro';
+import TeamSystem from '../components/TeamSystem.astro';
+import { executives, systems } from '../data/content';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title="The Team"
+  description="Team and member information for UMRT."
+>
+  <PageIntro
+    title="The Team"
+    description="Students building robotics systems together."
+    image="/assets/images/teamphoto-2425-1.svg"
+  />
+
+  <Section theme="dark">
+    <div class="prose">
+      <p>
+        Established in 2023, UMRT is a dynamic group of students united
+        by a shared passion for robotics and innovation. Members bring
+        skills from engineering, science, software, and related
+        disciplines to build effective robotics solutions for competitive
+        challenges.
+      </p>
+    </div>
+  </Section>
+
+  <Section
+    title="Executive Team"
+    id="team"
+  >
+    <div class="grid grid-3">
+      {
+        executives.map((exec) => (
+          <TeamMember {...exec} />
+        ))
+      }
+    </div>
+
+    <p
+      class="small"
+      style="text-align:center;margin-top:1.5rem"
+    >
+      Replace the placeholder executive collection in
+      <code>src/data/content.ts</code> as current leadership is confirmed.
+    </p>
+  </Section>
+
+  <Section title="Section Leads">
+    <div class="grid grid-2">
+      {
+        systems.map((system) => (
+          <TeamSystem {...system} />
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section
+    theme="primary"
+    title="Past Teams"
+  >
+    <div class="prose">
+      <p>
+        The current team builds on the work of previous members.
+        Historical leadership and member rosters are preserved in the
+        archive.
+      </p>
+
+      <div class="actions">
+        <a
+          class="btn btn-light"
+          href="/archive"
+        >
+          View archive
+        </a>
+      </div>
+    </div>
+  </Section>
+</Layout>
