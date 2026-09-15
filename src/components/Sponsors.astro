@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Section from './Section.astro';
-import { sponsors } from '../content/sponsors';
+import { sponsors } from '../content/sponsors/sponsors.ts';
 ---
 
 <Section theme="light" title='Our Sponsors'>
@@ -83,29 +83,23 @@ import { sponsors } from '../content/sponsors';
 <style>
 .sponsor-list {
   padding: 10px;
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 3.5rem;
 }
 
-.sponsor-list-high {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.sponsor-list-med {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.sponsor-list-low {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-}
-
 .sponsor {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 0;
+  flex: 0 0 calc(50% - 1.75rem);
+}
+
+.sponsor-list-med .sponsor {
+  flex-basis: calc(25% - 2.625rem);
+}
+
+.sponsor-list-low .sponsor {
+  flex-basis: calc(16.6667% - 2.9167rem);
 }
 
 .sponsor a {
@@ -124,16 +118,17 @@ import { sponsors } from '../content/sponsors';
 }
 
 @media (max-width: 992px) {
-  .sponsor-list-med {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+.sponsor-list {
+    gap: 2rem;
   }
 
-  .sponsor-list-low {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .sponsor-list-med .sponsor {
+    flex-basis: calc(33.3333% - 1.3333rem);
   }
-   .sponsor-list {
-    gap: 2rem;
-   }
+
+  .sponsor-list-low .sponsor {
+    flex-basis: calc(25% - 1.5rem);
+  }
 }
 
 @media (max-width: 576px) {
