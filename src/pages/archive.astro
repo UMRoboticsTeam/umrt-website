@@ -1,34 +1,36 @@
 ---
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import PageIntro from '../components/PageIntro.astro';
 import Section from '../components/Section.astro';
-import { archiveYears } from '../data/content';
+import { Image } from 'astro:assets';
+
+const archiveYears = (await getCollection('archive')).sort(
+  (a, b) => b.data.year.localeCompare(a.data.year)
+);
 ---
 
-<Layout
-  title="Archive"
-  description="Historical team information and archives for UMRT."
->
+<Layout title="Archive" description="Historical team information and archives for UMRT.">
   <PageIntro
     title="Archive"
     description="Past UMRT teams, leadership, and member rosters."
-    image="/assets/images/TeamPhoto-2.svg"
+    image="/assets/TeamPhoto-2324.jpg"
   />
 
   {
     archiveYears.map((archive, index) => (
       <Section
-        theme={index % 2 ? 'dark' : 'light'}
-        title={archive.year}
+        theme={index % 2 ? 'dark' : 'primary'}
+        title={archive.data.year}
       >
-        <img
+        <Image
           class="archive-photo"
-          src={archive.image}
-          alt={`${archive.year} team photo placeholder`}
+          src={archive.data.mainPhoto}
+          alt={`${archive.data.year} team photo`}
         />
 
         <div class="prose">
-          <p>{archive.description}</p>
+          <p>{archive.data.description}</p>
         </div>
 
         <div
@@ -45,7 +47,7 @@ import { archiveYears } from '../data/content';
 
             <tbody>
               {
-                archive.leaders.map(([role, member]) => (
+                archive.data.roles.map(({ role, member }) => (
                   <tr>
                     <th>{role}</th>
                     <td>{member}</td>
@@ -61,9 +63,136 @@ import { archiveYears } from '../data/content';
           style="margin-top:2rem"
         >
           <h3>Members</h3>
-          <p>{archive.members}</p>
+          <p>{archive.data.members.join(', ')}</p>
+        </div>
+
+        <div class="archive-gallery">
+          {
+            archive.data.gallery.map((photo) => (
+              <div class="gallery-item">
+                <Image
+                  src={photo.image}
+                  alt={photo.alt}
+                />
+              </div>
+            ))
+          }
         </div>
       </Section>
     ))
   }
 </Layout>
+
+<style>
+.archive-photo {
+  display: block;
+  width: 100%;
+  max-width: 650px;
+  height: auto;
+  margin: 0 auto 1.5rem;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.prose {
+  line-height: 1.45;
+}
+
+.prose p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.prose h3 {
+  margin-bottom: 0.5rem;
+}
+
+.table-wrap {
+  width: fit-content;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: auto;
+}
+
+.table-wrap table {
+  width: auto;
+  min-width: 360px;
+  border-collapse: collapse;
+}
+
+.table-wrap th,
+.table-wrap td {
+  padding: 0.4rem 0.8rem;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.table-wrap th {
+  text-align: left;
+}
+
+.archive-gallery {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.gallery-item {
+  flex: 0 0 calc(20% - 1.2rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+}
+
+.gallery-item img {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+@media (max-width: 992px) {
+  .archive-gallery {
+    gap: 1.25rem;
+  }
+
+  .gallery-item {
+    flex-basis: calc(25% - 0.9375rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .archive-gallery {
+    gap: 1rem;
+  }
+
+  .gallery-item {
+    flex-basis: calc(33.3333% - 0.6667rem);
+  }
+
+  .gallery-item img {
+    height: 150px;
+  }
+}
+
+@media (max-width: 576px) {
+  .archive-gallery {
+    gap: 0.75rem;
+  }
+
+  .gallery-item {
+    flex-basis: calc(50% - 0.375rem);
+  }
+
+  .gallery-item img {
+    height: 130px;
+  }
+}
+</style>

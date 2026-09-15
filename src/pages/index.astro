@@ -8,8 +8,8 @@ import RoverPlaceholder from '../components/RoverPlaceholder.astro';
 
 <Layout title="Home">
   <Hero imgSrc="/assets/teamphoto-2425-1.jpg">
-    <p class="main-header1">University of Manitoba</p>
-    <p class="main-header2">Robotics Team</p>
+    <h1 class="main-header top">University of Manitoba</h1>
+    <h1 class="main-header bottom">Robotics Team</h1>
   </Hero>
 
   <Section
@@ -66,10 +66,21 @@ import RoverPlaceholder from '../components/RoverPlaceholder.astro';
 </Layout>
 
 <style>
-.main-header1 {
-
+.main-header {
+  font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 3rem;
+  text-shadow: .09em .09em #063260;
 }
-.main-header2 {
-
+.main-header.top {
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+.main-header.bottom {
+  font-size: 4rem;
+  margin: 0;
+  padding: 0;
 }
 </style>
