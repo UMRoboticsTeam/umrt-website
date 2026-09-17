@@ -1,11 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
 
-import Layout from '../layouts/Layout.astro';
-import PageIntro from '../components/PageIntro.astro';
-import Section from '../components/Section.astro';
-import TeamMember from '../components/TeamMember.astro';
-import TeamSystem from '../components/TeamSystem.astro';
+import Layout from '@/layouts/Layout.astro';
+import PageIntro from '@/components/PageIntro.astro';
+import Section from '@/components/Section.astro';
+import PhotoShowcase from '@/components/PhotoShowcase.astro';
+import TeamMember from '@/components/TeamMember.astro';
+import TeamSystem from '@/components/TeamSystem.astro';
 
 
 const teamEntries = await getCollection('team');
@@ -29,22 +30,24 @@ const { executives, sections } = teamEntries[0].data;
     image="/assets/images/CIRC_Team_2526_1.jpg"
   />
 
-  <Section theme="dark">
+  <Section theme="dark" radial>
     <div class="prose">
       <p>
-        Established in 2023, UMRT is a dynamic group of students united
-        by a shared passion for robotics and innovation. Members bring
-        skills from engineering, science, software, and related
-        disciplines to build effective robotics solutions for competitive
-        challenges.
+        Established in 2023, UMRT is a dynamic group of students united 
+        by a shared passion for robotics and innovation. Drawing talent 
+        from a diverse range of academic disciplines, the team primarily 
+        consists of members from the Engineering and Science faculties. 
+        Together, they leverage their unique skills and expertise to 
+        build effective robotics solutions for competitive challenges.
       </p>
     </div>
   </Section>
 
-  <Section
-    title="Executive Team"
-    id="team"
-  >
+  <Section theme="deep-blue">
+    <PhotoShowcase directory="page_team" />
+  </Section>
+
+  <Section title="Executive Team" theme="grey" id="team">
     <div class="team-member-list executive-list">
       {
         executives.map((member) => (
@@ -54,7 +57,7 @@ const { executives, sections } = teamEntries[0].data;
     </div>
   </Section>
 
-  <Section title="Section Leads">
+  <Section title="Section Leads" theme="grey">
     <div class="section-leads-list">
       {
         sections.map((section) => (
@@ -64,10 +67,7 @@ const { executives, sections } = teamEntries[0].data;
     </div>
   </Section>
 
-  <Section
-    theme="primary"
-    title="Past Teams"
-  >
+  <Section theme="deep-blue" title="Past Teams">
     <div class="prose">
       <p>
         The current team builds on the work of previous members.

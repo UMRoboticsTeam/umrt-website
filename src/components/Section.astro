@@ -1,18 +1,37 @@
 ---
 interface Props {
-  theme?: 'light' | 'dark' | 'primary';
+  theme?:
+    | 'light'
+    | 'dark'
+    | 'primary'
+    | 'navy'
+    | 'blue'
+    | 'deep-blue'
+    | 'light-blue'
+    | 'pale-blue'
+    | 'off-white'
+    | 'surface'
+    | 'surface-light'
+    | 'black'
+    | 'grey';
+
   title?: string;
   id?: string;
+  radial?: boolean;
 }
 
 const {
   theme = 'light',
   title,
-  id
+  id,
+  radial = false
 } = Astro.props;
 ---
 
-<section id={id} class={`section ${theme}`}>
+<section
+  id={id}
+  class:list={['section', theme, { radial }]}
+>
   <div class="container">
     {title && <h2 class="section-heading">{title}</h2>}
 
@@ -22,38 +41,149 @@ const {
 
 <style>
 .section {
+  position: relative;
+  isolation: isolate;
   padding: 5rem 0;
   text-align: center;
 }
 
+/* =========================================================
+   LIGHT / NEUTRAL THEMES
+   ========================================================= */
+
 .section.light {
-  background: #fff;
+  background: var(--umrt-white);
+  color: var(--umrt-dark-grey);
 }
+
+.section.off-white {
+  background: var(--umrt-off-white);
+  color: var(--umrt-dark-grey);
+}
+
+.section.pale-blue {
+  background: var(--umrt-pale-blue);
+  color: var(--umrt-dark-blue);
+}
+
+.section.grey {
+  background: var(--umrt-light-grey);
+  color: var(--umrt-dark-blue);
+}
+/* =========================================================
+   DARK THEMES
+   ========================================================= */
 
 .section.dark {
-  background: var(--dark);
-  color: #fff;
+  background: var(--color-background);
+  color: var(--umrt-white);
 }
 
-.section.primary {
-  background: var(--primary);
-  color: #fff;
+.section.black {
+  background: var(--umrt-black);
+  color: var(--umrt-white);
 }
+
+.section.surface {
+  background: var(--color-surface);
+  color: var(--umrt-white);
+}
+
+.section.surface-light {
+  background: var(--color-surface-light);
+  color: var(--umrt-white);
+}
+
+/* =========================================================
+   BRAND BLUE THEMES
+   ========================================================= */
+
+.section.primary {
+  background: var(--color-primary);
+  color: var(--umrt-white);
+}
+
+.section.blue {
+  background: var(--umrt-blue);
+  color: var(--umrt-white);
+}
+
+.section.navy {
+  background: var(--umrt-navy);
+  color: var(--umrt-white);
+}
+
+.section.deep-blue {
+  background: var(--umrt-deep-blue);
+  color: var(--umrt-white);
+}
+
+.section.light-blue {
+  background: var(--umrt-light-blue);
+  color: var(--umrt-dark-blue);
+}
+
+/* =========================================================
+   SECTION HEADING
+   ========================================================= */
 
 .section-heading {
   text-align: center;
   margin: 0 0 2rem;
   font-size: clamp(1.5rem, 4vw, 2rem);
-  "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family:
+    "Merriweather Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    "Noto Sans",
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji";
 }
 
+/* Brand accent underline */
 .section-heading::after {
   content: "";
   display: block;
   width: 64px;
   height: 4px;
   margin: 0.7rem auto 0;
-  background: #5aa0e8;
+  background: var(--umrt-light-blue);
   border-radius: 999px;
+}
+
+/* =========================================================
+   RADIAL CENTER GLOW
+   ========================================================= */
+
+/*
+ * Uses a transparent white radial gradient so the effect
+ * can be applied to any theme without knowing its base colour.
+ *
+ * mix-blend-mode: screen makes the glow interact naturally
+ * with dark/coloured backgrounds.
+ */
+.section.radial::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.06) 30%,
+      rgba(255, 255, 255, 0) 70%
+    );
+
+  mix-blend-mode: screen;
 }
 </style>
