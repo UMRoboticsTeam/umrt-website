@@ -14,7 +14,9 @@
   "dependencies": {
     "@astrojs/markdown-satteri": "^0.4.1",
     "@astrojs/mdx": "^8.0.1",
-    "astro": "^7.2.10"
+    "astro": "^7.2.10",
+    "bootstrap-icons": "^1.13.1",
+    "three": "^0.186.0"
   },
   "allowScripts": {
     "esbuild": true

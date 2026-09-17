@@ -1,9 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import Section from '../components/Section.astro';
-import Sponsors from '../components/Sponsors.astro';
-import RoverPlaceholder from '../components/RoverPlaceholder.astro';
+import Layout from '@/layouts/Layout.astro';
+import Hero from '@/components/Hero.astro';
+import Section from '@/components/Section.astro';
+import Sponsors from '@/components/Sponsors.astro';
+import VoxelRover from '@/components/VoxelRover.astro';
 ---
 
 <Layout title="Home">
@@ -38,13 +38,29 @@ import RoverPlaceholder from '../components/RoverPlaceholder.astro';
   </Section>
 
   <Section theme="primary">
-    <RoverPlaceholder />
+    <VoxelRover />
   </Section>
 
-  <Section
-    theme="dark"
-    title="Competitions"
-  >
+  <Section theme="dark" title="Join Us">
+    <div class="prose">
+      <p>
+        Check out our socials and how to join the team by clicking on our linktree below!
+      </p>
+
+      <div class="actions">
+        <a
+          class="btn btn-light"
+          href="https://linktr.ee/umrt"
+        >
+          LINKTREE
+        </a>
+      </div>
+    </div>
+  </Section>
+  
+  <Sponsors />
+
+  <Section theme="dark" title="Competitions">
     <div class="prose">
       <p>
         UMRT competes in the Canadian International Rover Competition
@@ -61,8 +77,6 @@ import RoverPlaceholder from '../components/RoverPlaceholder.astro';
       </div>
     </div>
   </Section>
-
-  <Sponsors />
 </Layout>
 
 <style>
