@@ -12,10 +12,11 @@ import { competitions } from '../data/content';
   <PageIntro
     title="Competitions"
     description="UMRT's rover competition program and CIRC history."
-    image="/assets/images/CIRC-2024.svg"
+    image="/assets/images/CIRC-2025.jpg"
   />
 
   <Section title="Canadian International Rover Competition">
+    
     <div class="prose">
       <p>
         UMRT currently competes in the Canadian International Rover
@@ -31,18 +32,25 @@ import { competitions } from '../data/content';
           target="_blank"
           rel="noreferrer"
         >
-          CIRC official website
+          CIRC Official Website
         </a>
+        
       </div>
+      
     </div>
+    <img style="padding: 50px 0 0 0;"
+        class="archive-photo"
+        src="/assets/images/CIRC_banner.png"
+        alt="CIRC Logo"
+      />
   </Section>
 
   <Section theme="dark">
     <div class="container">
       <img
-        class="archive-photo"
-        src="/assets/images/circ-pano.svg"
-        alt="CIRC panorama placeholder"
+        class="pano-photo"
+        src="/assets/images/circ-2024-pano.jpg"
+        alt="CIRC panorama"
       />
     </div>
   </Section>
@@ -79,3 +87,23 @@ import { competitions } from '../data/content';
     </div>
   </Section>
 </Layout>
+
+<style>
+.archive-photo {
+  display: block;
+  width: 100%;
+  max-width: 650px;
+  height: auto;
+  margin: 0 auto 1.5rem;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.pano-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+}
+</style>

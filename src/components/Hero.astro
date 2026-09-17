@@ -36,7 +36,7 @@ const {
   <div class="masthead-holder">
     <div class="container hero-container">
       <div class="hero-content">
-          {title && <h1>{title}</h1>}
+          {title && <h1 class="hero-title">{title}</h1>}
           {subtitle && <p>{subtitle}</p>}
           
         <slot />
@@ -142,14 +142,15 @@ if (heroes.length) {
   width: 100%;
 }
 
-.hero h1 {
+.hero-title {
   margin: 0.25rem 0;
   color: #fff;
   font-size: clamp(2.5rem, 7vw, 5.5rem);
   line-height: 0.98;
-  font-weight: 100;
+  font-weight: 700;
   text-shadow: 0.08em 0.08em #063260;
-  "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  text-transform: uppercase;
+  font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .hero p {
