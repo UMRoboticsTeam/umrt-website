@@ -1,67 +1,20 @@
 {
   "exec_team":[
     {
-      "name":"Sydney Povey",
+      "name":"Khan Ayaan",
       "role":"President",
       "description":"",
-      "image":"S.Povey.jpg",
+      "image":"K.Ayaan.jpg",
       "socials":{},
       "typeIcon":"bi-award"
     },
     {
-      "name":"Edcel Abanto",
-      "role":"Vice President",
-      "description":"",
-      "image":"E.Abanto.jpg",
-      "socials":{}
-    },
-    {
-      "name":"Mai Bui",
+      "name":"Quinn Thiessen",
       "role":"Secretary",
       "description":"",
-      "image":"M.Bui.jpg",
+      "image":"Q.Thiessen.jpg",
       "socials":{},
       "typeIcon":"bi-pencil-square"
-    },
-    {
-      "name":"Noah Paulicelli",
-      "role":"Treasurer",
-      "description":"",
-      "image":"N.Paulicelli.jpg",
-      "socials":{},
-      "typeIcon":"bi-currency-dollar"
-    },
-    {
-      "name":"Spencer Molloy",
-      "role":"Sponsorship Director",
-      "description":"",
-      "image":"S.Molloy.jpg",
-      "socials":{},
-      "typeIcon":"bi-megaphone"
-    },
-    {
-      "name":"Kate Lacerna",
-      "role":"Events Director",
-      "description":"",
-      "image":"K.Lacerna.jpg",
-      "socials":{},
-      "typeIcon":"bi-easel"
-    },
-    {
-      "name":"Khan Ayaan",
-      "role":"Creatives Director",
-      "description":"",
-      "image":"K.Ayaan.jpg",
-      "socials":{},
-      "typeIcon":"bi-palette"
-    },
-    {
-      "name":"Noah Reeder",
-      "role":"Team Lead",
-      "description":"",
-      "image":"N.Reeder.jpg",
-      "socials":{},
-      "typeIcon":"bi-clipboard-check"
     }
   ],
   "leads":[
@@ -74,18 +27,18 @@
       "icon":"cpu",
       "leads":[
         {
-          "name":"Edcel Abanto",
-          "role":"Embedded Co-Lead (ROS)",
+          "name":"Samara Singh",
+          "role":"Embedded Co-Lead",
           "description":"",
-          "image":"E.Abanto.jpg",
+          "image":"blank-head.jpg",
           "socials":{},
           "typeIcon":"bi-cpu"
         },
         {
-          "name":"Ernest Gonzales",
+          "name":"Dev Patel",
           "role":"Embedded Co-Lead (Controller)",
           "description":"",
-          "image":"E.Gonzales.jpg",
+          "image":"blank-head.jpg",
           "socials":{},
           "typeIcon":"bi-cpu"
         }
@@ -98,15 +51,15 @@
       "icon":"broadcast-pin",
       "leads":[
         {
-          "name":"Connor Pagtakhan",
+          "name":"Domenic Chao",
           "role":"Comm-Ops Co-Lead",
           "description":"",
-          "image":"C.Pagtakhan.jpg",
+          "image":"blank-head.jpg",
           "socials":{},
           "typeIcon":"bi-wifi"
         },
         {
-          "name":"Domenic Chao",
+          "name":"Nadeen Shaheen",
           "role":"Comm-Ops Co-Lead",
           "description":"",
           "image":"blank-head.jpg",
@@ -123,9 +76,17 @@
       "leads":[
         {
           "name":"Quinn Gibbons",
-          "role":"Electrical Lead",
+          "role":"Electrical Lead Sr.",
           "description":"",
           "image":"Q.Gibbons.jpg",
+          "socials":{},
+          "typeIcon":"bi-lightning-charge"
+        },
+        {
+          "name":"Miguel Labra Da Rosa",
+          "role":"Electrical Lead Jr.",
+          "description":"",
+          "image":"blank-head.jpg",
           "socials":{},
           "typeIcon":"bi-lightning-charge"
         }
@@ -139,17 +100,9 @@
       "leads":[
         {
           "name":"Adan Akmal",
-          "role":"Chassis Co-Lead",
+          "role":"Chassis Lead",
           "description":"",
           "image":"A.Akmal.jpg",
-          "socials":{},
-          "typeIcon":"bi-gear"
-        },
-        {
-          "name":"Khan Ayaan",
-          "role":"Chassis Co-Lead",
-          "description":"",
-          "image":"K.Ayaan.jpg",
           "socials":{},
           "typeIcon":"bi-gear"
         }
@@ -163,15 +116,15 @@
       "leads":[
         {
           "name":"Ghrum Yemessghen",
-          "role":"Robotic Arm Co-Lead (Mechanical)",
+          "role":"Robotic Arm Co-Lead",
           "description":"",
           "image":"G.Yemessghen.jpg",
           "socials":{},
           "typeIcon":"bi-hammer"
         },
         {
-          "name":"Quinn Thiessen",
-          "role":"Robotic Arm Co-Lead (Software)",
+          "name":"Dylan Link",
+          "role":"Robotic Arm Co-Lead",
           "description":"",
           "image":"Q.Thiessen.jpg",
           "socials":{},
@@ -185,14 +138,7 @@
       "image":"subsystem-payload.jpg",
       "icon":"archive-fill",
       "leads":[
-        {
-          "name":"Spencer Molloy",
-          "role":"Mission Control Lead",
-          "description":"",
-          "image":"S.Molloy.jpg",
-          "socials":{},
-          "typeIcon":"bi-beaker"
-        }
+        
       ]
     }
   ]
