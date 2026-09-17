@@ -227,3 +227,78 @@ th {
     padding: 3.5rem 0;
   }
 }
+
+
+
+
+:root {
+  /* =========================================================
+     UMRT BRAND COLOURS
+     ========================================================= */
+
+  --umrt-navy: #063361;
+  --umrt-blue: #085CA6;
+  --umrt-deep-blue: #073359;
+  --umrt-light-blue: #82B0D9;
+  --umrt-black: #0D0D0D;
+
+  /* =========================================================
+     SUPPORTING NEUTRALS
+     ========================================================= */
+
+  --umrt-white: #FFFFFF;
+  --umrt-off-white: #F5F7FA;
+  --umrt-light-grey: #D9DEE5;
+  --umrt-grey: #9AA5B1;
+  --umrt-dark-grey: #343A40;
+
+  /* =========================================================
+     BLUE VARIATIONS
+     ========================================================= */
+
+  --umrt-pale-blue: #DCEAF7;
+  --umrt-muted-blue: #5E8DB8;
+  --umrt-dark-blue: #042747;
+
+  /* =========================================================
+     ACCENT COLOURS
+     These are deliberately restrained so they don't compete
+     with the blue branding.
+     ========================================================= */
+
+  --umrt-cyan: #55B7D9;
+  --umrt-teal: #4FA6A6;
+
+  --umrt-gold: #D8A93A;
+  --umrt-amber: #E3B84B;
+
+  /* =========================================================
+     SEMANTIC COLOURS
+     Use these when the purpose matters more than the exact
+     colour name.
+     ========================================================= */
+
+  --color-primary: var(--umrt-blue);
+  --color-primary-dark: var(--umrt-navy);
+  --color-primary-light: var(--umrt-light-blue);
+
+  --color-background: var(--umrt-black);
+  --color-surface: #17191C;
+  --color-surface-light: #22262B;
+
+  --color-text: var(--umrt-white);
+  --color-text-muted: var(--umrt-light-grey);
+  --color-text-subtle: var(--umrt-grey);
+
+  --color-border: rgba(130, 176, 217, 0.25);
+
+  --color-link: var(--umrt-light-blue);
+  --color-link-hover: var(--umrt-white);
+
+  --color-accent: var(--umrt-cyan);
+
+  /* Status colours */
+  --color-success: #4FAF75;
+  --color-warning: var(--umrt-amber);
+  --color-danger: #D95C5C;
+}

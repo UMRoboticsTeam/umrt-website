@@ -1,10 +1,22 @@
 ---
+import { getCollection } from 'astro:content';
+
 import Layout from '../layouts/Layout.astro';
 import PageIntro from '../components/PageIntro.astro';
 import Section from '../components/Section.astro';
 import TeamMember from '../components/TeamMember.astro';
 import TeamSystem from '../components/TeamSystem.astro';
-import { executives, systems } from '../data/content';
+
+
+const teamEntries = await getCollection('team');
+
+if (teamEntries.length !== 1) {
+  throw new Error(
+    `Expected exactly one team entry, found ${teamEntries.length}.`
+  );
+}
+
+const { executives, sections } = teamEntries[0].data;
 ---
 
 <Layout
@@ -14,7 +26,7 @@ import { executives, systems } from '../data/content';
   <PageIntro
     title="The Team"
     description="Students building robotics systems together."
-    image="/assets/images/teamphoto-2425-1.svg"
+    image="/assets/images/CIRC_Team_2526_1.jpg"
   />
 
   <Section theme="dark">
@@ -33,28 +45,20 @@ import { executives, systems } from '../data/content';
     title="Executive Team"
     id="team"
   >
-    <div class="grid grid-3">
+    <div class="team-member-list executive-list">
       {
-        executives.map((exec) => (
-          <TeamMember {...exec} />
+        executives.map((member) => (
+          <TeamMember member={member} />
         ))
       }
     </div>
-
-    <p
-      class="small"
-      style="text-align:center;margin-top:1.5rem"
-    >
-      Replace the placeholder executive collection in
-      <code>src/data/content.ts</code> as current leadership is confirmed.
-    </p>
   </Section>
 
   <Section title="Section Leads">
-    <div class="grid grid-2">
+    <div class="section-leads-list">
       {
-        systems.map((system) => (
-          <TeamSystem {...system} />
+        sections.map((section) => (
+          <TeamSystem section={section} />
         ))
       }
     </div>
@@ -82,3 +86,36 @@ import { executives, systems } from '../data/content';
     </div>
   </Section>
 </Layout>
+
+<style>
+.team-member-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.executive-list {
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+.section-leads-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+@media (max-width: 700px) {
+  .team-member-list {
+    gap: 0.75rem;
+  }
+
+  .section-leads-list {
+    gap: 1.25rem;
+  }
+}
+</style>

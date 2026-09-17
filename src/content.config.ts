@@ -2,21 +2,6 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-const sponsors = defineCollection({
-  loader: glob({
-    pattern: '**/*.md',
-    base: './src/content/sponsors',
-  }),
-
-  schema: ({ image }) =>
-    z.object({
-      name: z.string(),
-      logo: image(),
-      href: z.string().url().optional(),
-      tier: z.enum(['low', 'med', 'high']),
-    }),
-});
-
 const archive = defineCollection({
   loader: glob({
     pattern: '**/*.mdx',
@@ -47,7 +32,43 @@ const archive = defineCollection({
     }),
 });
 
+const team = defineCollection({
+  loader: glob({
+    pattern: '**/*.mdx',
+    base: './src/content/team',
+  }),
+
+  schema: ({ image }) =>
+    z.object({
+      executives: z.array(
+        z.object({
+          name: z.string(),
+          role: z.string(),
+          image: image(),
+          socials: z.record(z.string(), z.string()),
+          description: z.string().optional(),
+        })
+      ),
+
+      sections: z.array(
+        z.object({
+          name: z.string(),
+          description: z.string().optional(),
+          leads: z.array(
+            z.object({
+              name: z.string(),
+              role: z.string(),
+              image: image(),
+              socials: z.record(z.string(), z.string()),
+              description: z.string().optional(),
+            })
+          ),
+        })
+      ),
+    }),
+});
+
 export const collections = {
-  sponsors,
   archive,
+  team,
 };

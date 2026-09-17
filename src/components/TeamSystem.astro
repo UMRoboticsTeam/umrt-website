@@ -1,22 +1,163 @@
 ---
-interface Props {
+import TeamMember from './TeamMember.astro';
+import type { ImageMetadata } from 'astro';
+
+interface Member {
   name: string;
-  description: string;
+  role: string;
+  image: ImageMetadata;
+  socials: Record<string, string>;
+  description?: string;
 }
 
-const {
-  name,
-  description
-} = Astro.props;
+interface Section {
+  name: string;
+  description?: string;
+  leads: Member[];
+}
+
+interface Props {
+  section: Section;
+}
+
+const { section } = Astro.props;
 ---
 
-<article class="card">
-  <h3>{name}</h3>
+<section class="system-container">
+  <header class="system-header">
+    <div class="system-heading">
+      <h3>{section.name}</h3>
+    </div>
+  </header>
 
-  <p>{description}</p>
+  <div class="system-description">
+    {section.description}
+  </div>
 
-  <p class="small">
-    Lead/member roster to be populated in
-    <code>src/data/content.ts</code>.
-  </p>
-</article>
+  <div class="members-grid">
+    {
+      section.leads.map((member) => (
+        <TeamMember member={member} />
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .system-container {
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 14px;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.035),
+        rgba(255, 255, 255, 0.012)
+      );
+
+    box-shadow:
+      0 8px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .system-header {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    padding: 1rem 1.25rem;
+
+    background:
+      linear-gradient(
+        90deg,
+        rgb(11, 27, 83),
+        rgba(127, 130, 179, 0.045) 80%,
+        transparent
+      );
+
+    border-bottom: 1px solid rgba(127, 179, 179, 0.25);
+  }
+
+  .system-header::before {
+    content: '';
+
+    position: absolute;
+    inset: 0 auto 0 0;
+
+    width: 5px;
+
+    background: var(--primary, #7fb3b3);
+  }
+
+  .system-heading {
+    min-width: 0;
+  }
+
+  .system-eyebrow {
+    display: block;
+
+    margin-bottom: 0.15rem;
+
+    color: var(--primary, #7fb3b3);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    margin: 0;
+
+    color: #fff;
+    font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+    font-weight: 800;
+  }
+
+  .system-description {
+    max-width: 850px;
+    margin: 0 auto;
+
+    padding: 1rem 1.25rem 0;
+
+    color: var(--muted, rgba(255, 255, 255, 0.68));
+    font-size: 0.88rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .members-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+
+    padding: 1.25rem 1rem 1.5rem;
+  }
+
+  @media (max-width: 700px) {
+    .system-header {
+      padding: 0.9rem 1rem;
+    }
+
+    .system-description {
+      padding-inline: 1rem;
+      font-size: 0.8rem;
+    }
+
+    .members-grid {
+      gap: 0.65rem;
+      padding-inline: 0.5rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .lead-count {
+      display: none;
+    }
+  }
+</style>
