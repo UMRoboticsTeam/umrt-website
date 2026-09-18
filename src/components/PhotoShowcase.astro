@@ -3,22 +3,20 @@ import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
-  directory?: string;
+  directory: string;
 }
 
-const {
-  directory = 'image_showcase_thingy_1',
-} = Astro.props;
+const { directory } = Astro.props;
 
 const imageModules = import.meta.glob(
-  '../content/images/*/*.{jpg,jpeg,png,webp,avif,gif}',
+  '../content/**/*.{jpg,jpeg,png,webp,avif,gif}',
   {
     eager: true,
     import: 'default',
   }
 );
 
-const directoryPrefix = `../content/images/${directory}/`;
+const directoryPrefix = `../content/${directory.replace(/^\/|\/$/g, '')}/`;
 
 const images = Object.entries(imageModules)
   .filter(([path]) => path.startsWith(directoryPrefix))
@@ -47,6 +45,7 @@ const images = Object.entries(imageModules)
             src={image}
             alt={`Showcase photo ${index + 1}`}
             loading={index < 2 ? 'eager' : 'lazy'}
+            quality="mid"
           />
         </div>
       ))
@@ -63,92 +62,92 @@ const images = Object.entries(imageModules)
 </div>
 
 <script>
-  const showcases = document.querySelectorAll('.photo-showcase');
+const showcases = document.querySelectorAll('.photo-showcase');
 
-  showcases.forEach((showcase) => {
-    const scroller =
-      showcase.querySelector('.photo-scroller');
+showcases.forEach((showcase) => {
+  const scroller =
+    showcase.querySelector('.photo-scroller');
 
-    const leftButton =
-      showcase.querySelector('.scroll-left');
+  const leftButton =
+    showcase.querySelector('.scroll-left');
 
-    const rightButton =
-      showcase.querySelector('.scroll-right');
+  const rightButton =
+    showcase.querySelector('.scroll-right');
 
-    if (!scroller || !leftButton || !rightButton) {
-      return;
-    }
+  if (!scroller || !leftButton || !rightButton) {
+    return;
+  }
 
-    const getScrollAmount = () => {
-      return Math.max(
-        scroller.clientWidth * 0.8,
-        200
-      );
-    };
+  const getScrollAmount = () => {
+    return Math.max(
+      scroller.clientWidth * 0.8,
+      200
+    );
+  };
 
-    const updateButtons = () => {
-      const maxScroll =
-        scroller.scrollWidth -
-        scroller.clientWidth;
+  const updateButtons = () => {
+    const maxScroll =
+      scroller.scrollWidth -
+      scroller.clientWidth;
 
-      leftButton.disabled =
-        scroller.scrollLeft <= 1;
+    leftButton.disabled =
+      scroller.scrollLeft <= 1;
 
-      rightButton.disabled =
-        scroller.scrollLeft >= maxScroll - 1;
-    };
+    rightButton.disabled =
+      scroller.scrollLeft >= maxScroll - 1;
+  };
 
-    leftButton.addEventListener('click', () => {
-      scroller.scrollBy({
-        left: -getScrollAmount(),
-        behavior: 'smooth',
-      });
+  leftButton.addEventListener('click', () => {
+    scroller.scrollBy({
+      left: -getScrollAmount(),
+      behavior: 'smooth',
     });
-
-    rightButton.addEventListener('click', () => {
-      scroller.scrollBy({
-        left: getScrollAmount(),
-        behavior: 'smooth',
-      });
-    });
-
-    /*
-     * Shift + mouse wheel:
-     * Convert vertical wheel movement into
-     * horizontal scrolling.
-     */
-    scroller.addEventListener(
-      'wheel',
-      (event) => {
-        if (!event.shiftKey) {
-          return;
-        }
-
-        event.preventDefault();
-
-        const delta =
-          Math.abs(event.deltaX) >
-          Math.abs(event.deltaY)
-            ? event.deltaX
-            : event.deltaY;
-
-        scroller.scrollLeft += delta;
-      },
-      { passive: false }
-    );
-
-    scroller.addEventListener(
-      'scroll',
-      updateButtons
-    );
-
-    window.addEventListener(
-      'resize',
-      updateButtons
-    );
-
-    updateButtons();
   });
+
+  rightButton.addEventListener('click', () => {
+    scroller.scrollBy({
+      left: getScrollAmount(),
+      behavior: 'smooth',
+    });
+  });
+
+  /*
+    * Shift + mouse wheel:
+    * Convert vertical wheel movement into
+    * horizontal scrolling.
+    */
+  scroller.addEventListener(
+    'wheel',
+    (event) => {
+      if (!event.shiftKey) {
+        return;
+      }
+
+      event.preventDefault();
+
+      const delta =
+        Math.abs(event.deltaX) >
+        Math.abs(event.deltaY)
+          ? event.deltaX
+          : event.deltaY;
+
+      scroller.scrollLeft += delta;
+    },
+    { passive: false }
+  );
+
+  scroller.addEventListener(
+    'scroll',
+    updateButtons
+  );
+
+  window.addEventListener(
+    'resize',
+    updateButtons
+  );
+
+  updateButtons();
+});
 </script>
 
 <style>

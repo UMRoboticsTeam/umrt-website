@@ -11,6 +11,7 @@ const archive = defineCollection({
   schema: ({ image }) =>
     z.object({
       year: z.string(),
+      theme: z.string(),
       mainPhoto: image(),
       description: z.string(),
 
@@ -22,13 +23,6 @@ const archive = defineCollection({
       ),
 
       members: z.array(z.string()),
-
-      gallery: z.array(
-        z.object({
-          image: image(),
-          alt: z.string(),
-        })
-      ),
     }),
 });
 
