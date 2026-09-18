@@ -1,0 +1,307 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  directory: string;
+}
+
+const { directory } = Astro.props;
+
+const imageModules = import.meta.glob(
+  '../content/**/*.{jpg,jpeg,png,webp,avif,gif}',
+  {
+    eager: true,
+    import: 'default',
+  }
+);
+
+const directoryPrefix = `../content/${directory.replace(/^\/|\/$/g, '')}/`;
+
+const images = Object.entries(imageModules)
+  .filter(([path]) => path.startsWith(directoryPrefix))
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([, image]) => image as ImageMetadata);
+---
+
+<div class="photo-showcase">
+  <button
+    class="scroll-button scroll-left"
+    type="button"
+    aria-label="Scroll photos left"
+  >
+    <span aria-hidden="true">‹</span>
+  </button>
+
+  <div
+    class="photo-scroller"
+    tabindex="0"
+    aria-label="Photo gallery"
+  >
+    {
+      images.map((image, index) => (
+        <div class="photo">
+          <Image
+            src={image}
+            alt={`Showcase photo ${index + 1}`}
+            loading={index < 2 ? 'eager' : 'lazy'}
+            quality="mid"
+          />
+        </div>
+      ))
+    }
+  </div>
+
+  <button
+    class="scroll-button scroll-right"
+    type="button"
+    aria-label="Scroll photos right"
+  >
+    <span aria-hidden="true">›</span>
+  </button>
+</div>
+
+<script>
+const showcases = document.querySelectorAll('.photo-showcase');
+
+showcases.forEach((showcase) => {
+  const scroller =
+    showcase.querySelector('.photo-scroller');
+
+  const leftButton =
+    showcase.querySelector('.scroll-left');
+
+  const rightButton =
+    showcase.querySelector('.scroll-right');
+
+  if (!scroller || !leftButton || !rightButton) {
+    return;
+  }
+
+  const getScrollAmount = () => {
+    return Math.max(
+      scroller.clientWidth * 0.8,
+      200
+    );
+  };
+
+  const updateButtons = () => {
+    const maxScroll =
+      scroller.scrollWidth -
+      scroller.clientWidth;
+
+    leftButton.disabled =
+      scroller.scrollLeft <= 1;
+
+    rightButton.disabled =
+      scroller.scrollLeft >= maxScroll - 1;
+  };
+
+  leftButton.addEventListener('click', () => {
+    scroller.scrollBy({
+      left: -getScrollAmount(),
+      behavior: 'smooth',
+    });
+  });
+
+  rightButton.addEventListener('click', () => {
+    scroller.scrollBy({
+      left: getScrollAmount(),
+      behavior: 'smooth',
+    });
+  });
+
+  /*
+    * Shift + mouse wheel:
+    * Convert vertical wheel movement into
+    * horizontal scrolling.
+    */
+  scroller.addEventListener(
+    'wheel',
+    (event) => {
+      if (!event.shiftKey) {
+        return;
+      }
+
+      event.preventDefault();
+
+      const delta =
+        Math.abs(event.deltaX) >
+        Math.abs(event.deltaY)
+          ? event.deltaX
+          : event.deltaY;
+
+      scroller.scrollLeft += delta;
+    },
+    { passive: false }
+  );
+
+  scroller.addEventListener(
+    'scroll',
+    updateButtons
+  );
+
+  window.addEventListener(
+    'resize',
+    updateButtons
+  );
+
+  updateButtons();
+});
+</script>
+
+<style>
+.photo-showcase {
+  position: relative;
+  width: 100%;
+}
+
+.photo-scroller {
+  display: flex;
+  align-items: stretch;
+
+  width: 100%;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  gap: 0.75rem;
+
+  padding: 0.25rem 3.25rem;
+
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
+
+  scrollbar-width: none;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.photo-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.photo {
+  flex: 0 0 auto;
+
+  height: clamp(
+    120px,
+    32vw,
+    280px
+  );
+
+  overflow: hidden;
+
+  border-radius: 8px;
+
+  scroll-snap-align: center;
+}
+
+.photo :global(img) {
+  display: block;
+
+  width: auto;
+  height: 100%;
+
+  max-width: none;
+
+  object-fit: cover;
+}
+
+.scroll-button {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2.5rem;
+  height: 2.5rem;
+
+  padding: 0;
+
+  transform: translateY(-50%);
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, 0.65);
+  color: white;
+
+  font-size: 2rem;
+  line-height: 1;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(6px);
+
+  transition:
+    background 120ms ease,
+    opacity 120ms ease,
+    transform 120ms ease;
+}
+
+.scroll-button:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.85);
+
+  transform:
+    translateY(-50%)
+    scale(1.05);
+}
+
+.scroll-button:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.scroll-left {
+  left: 0.5rem;
+}
+
+.scroll-right {
+  right: 0.5rem;
+}
+
+@media (max-width: 700px) {
+  .photo-scroller {
+    gap: 0.5rem;
+    padding-inline: 2.75rem;
+  }
+
+  .photo {
+    height: clamp(
+      160px,
+      48vw,
+      280px
+    );
+  }
+
+  .scroll-button {
+    width: 2.15rem;
+    height: 2.15rem;
+
+    font-size: 1.7rem;
+  }
+
+  .scroll-left {
+    left: 0.25rem;
+  }
+
+  .scroll-right {
+    right: 0.25rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .photo-scroller {
+    padding-inline: 2.5rem;
+  }
+
+  .photo {
+    height: 190px;
+  }
+}
+</style>

@@ -1,0 +1,97 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Hero from '@/components/Hero.astro';
+import Section from '@/components/Section.astro';
+import Sponsors from '@/components/Sponsors.astro';
+import VoxelRover from '@/components/VoxelRover.astro';
+---
+
+<Layout title="Home">
+  <Hero imgSrc="/assets/images/CIRC_Team_2526.jpg">
+    <h1 class="main-header top">University of Manitoba</h1>
+    <h1 class="main-header bottom">Robotics Team</h1>
+  </Hero>
+
+  <Section
+    theme="navy"
+    title="About Us"
+    id="about"
+  >
+    <div class="prose">
+      <p>
+        The University of Manitoba Robotics Team (UMRT) is an ambitious
+        group of students competing in the Canadian
+        International Rover Challenge (CIRC) . Our disciplines range from
+        Computer Vision, Mechanical Engineering, Electrical Engineering,
+        Embedded Systems, Wireless Communications, and Pedology.
+        We also plan workshops, open competitions, outreach events, and
+        other activities that make robotics accessible to students.
+      </p>
+
+      <p>
+        Contact us at <a href="mailto:contact@umrt.ca">contact@umrt.ca</a> for any questions or inquiries.
+      </p>
+    </div>
+  </Section>
+
+  <Section theme="surface-light" radial>
+    <VoxelRover />
+  </Section>
+
+  <Section theme="deep-blue" title="Join Us" id="join">
+    <div class="prose">
+      <p>
+        Check out our socials and how to join the team by clicking on our linktree below!
+      </p>
+
+      <div class="actions">
+        <a
+          class="btn btn-light"
+          href="https://linktr.ee/umrt"
+        >
+          Linktree
+        </a>
+      </div>
+    </div>
+  </Section>
+  
+  <Sponsors />
+
+  <Section theme="deep-blue" title="Competitions">
+    <div class="prose">
+      <p>
+        UMRT competes in the Canadian International Rover Competition
+        (CIRC), held annually in Drumheller, Alberta.
+      </p>
+
+      <div class="actions">
+        <a
+          class="btn btn-light"
+          href="/competitions"
+        >
+          View competitions
+        </a>
+      </div>
+    </div>
+  </Section>
+</Layout>
+
+<style>
+.main-header {
+  font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 3rem;
+  text-shadow: .09em .09em #063260;
+}
+.main-header.top {
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+.main-header.bottom {
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  margin: 0;
+  padding: 0;
+}
+</style>

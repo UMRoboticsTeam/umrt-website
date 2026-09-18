@@ -1,0 +1,108 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import Section from '../components/Section.astro';
+import { competitions } from '../data/content';
+---
+
+<Layout
+  title="Competitions"
+  description="Competition information for UMRT."
+>
+  <PageIntro
+    title="Competitions"
+    image="/assets/images/CIRC-2025.jpg"
+  />
+
+  <Section title="Canadian International Rover Competition">
+    
+    <div class="prose">
+      <p>
+        UMRT currently competes in the Canadian International Rover
+        Competition (CIRC) in Drumheller, Alberta. CIRC is a post-secondary
+        student rover competition in which teams complete field,
+        autonomous-operation, manipulation, and mission-oriented challenges.
+      </p>
+
+      <div class="actions">
+        <a
+          class="btn btn-primary"
+          href="https://circ.cstag.ca/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          CIRC Official Website
+        </a>
+        
+      </div>
+      
+    </div>
+    <img style="padding: 50px 0 0 0;"
+        class="archive-photo"
+        src="/assets/images/CIRC_banner.png"
+        alt="CIRC Logo"
+      />
+  </Section>
+
+  <Section theme="dark" radial>
+    <div class="container">
+      <img
+        class="pano-photo"
+        src="/assets/images/circ-2024-pano.jpg"
+        alt="CIRC panorama"
+      />
+    </div>
+  </Section>
+
+  <Section title="Competition History">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Competition</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {
+            competitions.map((item) => (
+              <tr>
+                <th>{item.date}</th>
+                <td>
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {item.title}
+                  </a>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </Section>
+</Layout>
+
+<style>
+.archive-photo {
+  display: block;
+  width: 100%;
+  max-width: 650px;
+  height: auto;
+  margin: 0 auto 1.5rem;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.pano-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+}
+</style>

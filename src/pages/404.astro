@@ -1,0 +1,64 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageIntro from '@/components/PageIntro.astro';
+import Section from '@/components/Section.astro';
+---
+
+<Layout
+  title="Page Not Found"
+  description="The requested page could not be found."
+>
+  <PageIntro
+    title="Page Not Found"
+    image="/assets/images/pp1-cruise.jpg"
+  />
+
+  <Section theme="deep-blue">
+    <div class="not-found">
+      <div class="error-code">404</div>
+
+      <h2>This page doesn't exist.</h2>
+
+      <p>
+        The page you are looking for may have been moved, removed, or the URL
+        may be incorrect.
+      </p>
+
+      <a class="btn btn-light" href="/">
+        Return home
+      </a>
+    </div>
+  </Section>
+</Layout>
+
+<style>
+  .not-found {
+    max-width: 650px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .error-code {
+    margin-bottom: 0.5rem;
+
+    color: var(--umrt-light-blue);
+    font-size: clamp(4rem, 12vw, 7rem);
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  h2 {
+    margin: 0 0 1rem;
+
+    color: var(--umrt-white);
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+  }
+
+  p {
+    max-width: 500px;
+    margin: 0 auto 1.5rem;
+
+    color: var(--umrt-light-grey);
+    line-height: 1.6;
+  }
+</style>

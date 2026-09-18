@@ -1,0 +1,61 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageIntro from '@/components/PageIntro.astro';
+import Section from '@/components/Section.astro';
+import Sponsors from '@/components/Sponsors.astro';
+---
+
+<Layout
+  title="Sponsorships"
+  description="Sponsorship information for UMRT."
+>
+  <PageIntro
+    title="Sponsorships"
+    image="/assets/images/JCA_ROS_Event.jpg"
+  />
+
+  <Section theme="deep-blue">
+    <div class="prose">
+      <p>
+        UMRT seeks sponsors to support its rover competition program and help
+        provide our members with the resources and experience needed to design,
+        build, and compete with our rover. Sponsorship can include monetary
+        contributions, software sponsorships, equipment, services, or other
+        in-kind support.
+        We greatly appreciate the support of our current sponsors and partners,
+        whose contributions help make our projects and competition efforts
+        possible.
+      </p>
+
+      <p>
+        Interested in supporting UMRT? Contact us 
+        at <a href="mailto:contact@umrt.ca">contact@umrt.ca</a> to 
+        discuss sponsorship opportunities or to request our sponsorship
+        package.
+      </p>
+    </div>
+  </Section>
+
+  <Sponsors />
+
+  <!-- <Section title="Sponsorship Information">
+    <div class="grid grid-3">
+      {
+        [
+          'Financial support',
+          'Software & tooling',
+          'Equipment & services'
+        ].map((item) => (
+          <article class="card">
+            <h3>{item}</h3>
+
+            <p>
+              Placeholder for package details, benefits,
+              recognition, and contact workflow.
+            </p>
+          </article>
+        ))
+      }
+    </div>
+  </Section> -->
+</Layout>

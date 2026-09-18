@@ -1,0 +1,293 @@
+---
+const navItems = [
+  { href: '/#about', label: 'About' },
+  { href: '/team', label: 'The Team' },
+  { href: '/competitions', label: 'Competitions' },
+  { href: '/sponsorships', label: 'Sponsorships' },
+  { href: '/#join', label: 'Join Us!' },
+];
+---
+
+<header class="site-header">
+  <nav class="navbar" id="mainNav">
+    <div class="nav-container">
+      <a class="navbar-brand" href="/" aria-label="UMRT home">
+        <img src="/assets/images/umrt-logo-transparent.png" />
+      </a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        aria-controls="navbarResponsive"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav">
+          {
+            navItems.map((item) => (
+              <li class="nav-item">
+                <a class="nav-link" href={item.href}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const toggler = document.querySelector('.navbar-toggler');
+  const collapse = document.querySelector('#navbarResponsive');
+
+  const updateScrollState = () => {
+    document.documentElement.dataset.scroll =
+      window.scrollY < 20 ? '0' : '1';
+  };
+
+  updateScrollState();
+  window.addEventListener('scroll', updateScrollState, { passive: true });
+
+  toggler?.addEventListener('click', () => {
+    const expanded = toggler.getAttribute('aria-expanded') === 'true';
+
+    toggler.setAttribute('aria-expanded', String(!expanded));
+    collapse?.classList.toggle('show', !expanded);
+  });
+
+  collapse?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      toggler?.setAttribute('aria-expanded', 'false');
+      collapse?.classList.remove('show');
+    });
+  });
+</script>
+
+<style>
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 1000;
+  width: 100%;
+}
+
+.navbar {
+  position: relative;
+  width: 100%;
+  padding: 2px 0;
+  background: transparent;
+}
+
+.navbar::before,
+.navbar-collapse::before {
+  content: "";
+  position: absolute;
+  /* background: linear-gradient(
+    180deg,
+    rgba(53, 54, 59, 1) 0%,
+    rgba(36, 37, 41, 1) 85%
+  ); */
+  background: var(--umrt-dark-grey);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.navbar::before {
+  inset: 0;
+  z-index: -1;
+}
+
+:global(html[data-scroll='1']) .navbar::before,
+:global(html[data-scroll='1']) .navbar-collapse::before {
+  opacity: 1;
+}
+
+:global(html[data-scroll='1']) .navbar {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 1);
+}
+
+.nav-container {
+  width: min(calc(100% - 2rem), 1200px);
+  min-height: 68px;
+  margin: 0 auto;
+  padding: 0 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  height: 68px;
+  flex-shrink: 0;
+}
+
+.navbar-brand img {
+  display: block;
+  width: auto;
+  height: 64px;
+}
+
+.navbar-collapse {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  padding: 5px;
+}
+
+.nav-link {
+  position: relative;
+  display: block;
+  padding: 5px 10px;
+  margin: 0 5px;
+  color: rgba(255, 255, 255, 0.75);
+  font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.5s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.13) 10%,
+    #fff,
+    rgba(255, 255, 255, 0.13) 90%
+  );
+  background-size: 200% 100%;
+  opacity: 0;
+  animation: shimmer 2s linear infinite;
+  transition: opacity 0.6s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: #fff;
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  opacity: 1;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.navbar-toggler {
+  display: none;
+  width: 44px;
+  height: 44px;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.navbar-toggler span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #fff;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.navbar-toggler[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.navbar-toggler[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-toggler[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 800px) {
+  .navbar-toggler {
+    display: flex;
+    margin-left: auto;
+  }
+
+  .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: none;
+    padding: 0.5rem 1rem 1rem;
+    margin: 0;
+    transform: translateY(-8px);
+    transition: transform 0.25s ease;
+  }
+
+  .navbar-collapse::before {
+    inset: 0;
+    z-index: -1;
+  }
+
+  .navbar-collapse.show {
+    display: block;
+    transform: translateY(0);
+  }
+
+  .navbar-nav {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-item {
+    padding: 2px 0;
+  }
+
+  .nav-link {
+    padding: 0.75rem 0.5rem;
+    margin: 0;
+    text-align: center;
+  }
+}
+</style>

@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import Section from '../components/Section.astro';
+---
+
+<Layout
+  title="About"
+  description="About the University of Manitoba Robotics Team."
+>
+  <PageIntro
+    title="About UMRT"
+    description="A student-led robotics team at the University of Manitoba."
+  />
+
+  <Section title="Who We Are">
+    <div class="prose">
+      <p>
+        UMRT brings together students interested in robotics, engineering,
+        software, hardware, communications, and field operations. The
+        current site architecture keeps content separate from presentation
+        so future team members can replace hardcoded data without rewriting
+        page layouts.
+      </p>
+
+      <p>
+        The original Nuxt site describes UMRT as a multidisciplinary group
+        pursuing the Canadian International Rover Challenge while
+        expanding into workshops, open competitions, and outreach.
+      </p>
+    </div>
+  </Section>
+
+  <Section
+    theme="dark"
+    title="Disciplines"
+  >
+    <div class="grid grid-3">
+      {
+        [
+          'Computer Vision',
+          'Mechanical Engineering',
+          'Electrical Engineering',
+          'Embedded Systems',
+          'Wireless Communications',
+          'Robotics & Field Operations'
+        ].map((item) => (
+          <article class="card">
+            <h3>{item}</h3>
+            <p>
+              Content placeholder for the discipline overview,
+              projects, tools, and current leads.
+            </p>
+          </article>
+        ))
+      }
+    </div>
+  </Section>
+</Layout>

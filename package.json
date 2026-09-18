@@ -1,22 +1,24 @@
 {
-  "name": "nuxt-app",
-  "private": true,
+  "name": "umrt-website",
   "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev -p --host 5500",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "dev": "astro dev --host",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "dependencies": {
-    "@nuxt/image": "^1.8.1",
-    "bootstrap": "^5.3.3",
-    "bootstrap-icons": "^1.11.3",
-    "gh-pages": "^6.1.1",
-    "nuxt": "^3.13.0",
-    "three": "^0.183.1",
-    "vue": "latest",
-    "vue-router": "latest"
+    "@astrojs/markdown-satteri": "^0.4.1",
+    "@astrojs/mdx": "^8.0.1",
+    "astro": "^7.2.10",
+    "bootstrap-icons": "^1.13.1",
+    "three": "^0.186.0"
+  },
+  "allowScripts": {
+    "esbuild": true
   }
 }

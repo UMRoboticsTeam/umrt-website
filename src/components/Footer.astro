@@ -1,0 +1,256 @@
+---
+---
+
+<footer class="site-footer">
+  <div class="container footer-content">
+    <div class="footer-main">
+      <div class="footer-contact">
+        <h2>Contact</h2>
+
+        <p>
+          Have an inquiry, want to learn more about the team, or just want
+          to get in touch? Send us an email at <a href="mailto:contact@umrt.ca" class="contact-email">contact@umrt.ca</a>.
+        </p>
+
+        <div class="social-links">
+          <!-- instagram -->
+          <a href="https://www.instagram.com/umroboticsteam/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <i class="bi bi-instagram"></i>
+          </a>
+          <!-- linkedin -->
+          <a href="https://linkedin.com/company/univeristy-of-manitoba-robotics-team/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <i class="bi bi-linkedin"></i>
+          </a>
+          <!-- youtube -->
+          <!-- <a href="https://www.youtube.com/@UMRoboticsTeam" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <i class="bi bi-youtube"></i>
+          </a> -->
+          <!-- github -->
+          <a href="https://github.com/umroboticsTeam/" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <i class="bi bi-github"></i>
+          </a>
+          <!-- linktree -->
+          <a href="https://linktr.ee/umrt/" target="_blank" rel="noopener noreferrer" aria-label="LinkTree">
+            <i class="bi bi-link-45deg"></i>
+          </a>
+          <!-- general email -->
+          <a href="mailto:contact@umrt.ca">
+            <i class="bi bi-envelope"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-address">
+        <h2>Find Us</h2>
+
+        <address>
+          University of Manitoba Robotics Team<br />
+          Engineering &amp; Information Technology Complex (EITC) E3-572<br />
+          75A Chancellors Circle<br />
+          University of Manitoba<br />
+          Winnipeg, MB, R3T 5V6
+        </address>
+      </div>
+
+      <div class="footer-map">
+        <div class="map-container">
+          <iframe
+            src="https://www.google.com/maps?q=Engineering+%26+Information+Technology+Complex+(EITC),+75A+Chancellors+Circle,+Winnipeg,+MB+R3T+5V6&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="University of Manitoba Robotics Team location"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 University of Manitoba Robotics Team</span>
+
+      <a
+        href="https://github.com/UMRoboticsTeam/umrt-website/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Source code
+      </a>
+    </div>
+  </div>
+</footer>
+
+<style>
+.site-footer {
+  background: var(--umrt-black);
+  color: var(--umrt-light-grey);
+  border-top: 1px solid rgba(130, 176, 217, 0.18);
+}
+
+.footer-content {
+  padding-top: 3rem;
+  padding-bottom: 1.25rem;
+}
+
+.footer-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.25fr;
+  gap: 3rem;
+
+  max-width: 1200px;
+  margin-inline: auto;
+  align-items: start;
+}
+
+.footer-contact h2,
+.footer-address h2 {
+  margin: 0 0 0.75rem;
+
+  color: var(--umrt-white);
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.contact-email {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer-contact p {
+  max-width: 500px;
+  margin: 0;
+
+  line-height: 1.6;
+}
+
+.footer-contact a {
+  color: var(--umrt-light-blue);
+}
+
+.footer-contact a:hover {
+  color: var(--umrt-white);
+}
+
+.contact-email {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.social-links {
+  display: flex;
+  gap: 0.75rem;
+
+  margin-top: 1.25rem;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 2.5rem;
+  height: 2.5rem;
+
+  color: var(--umrt-light-blue);
+
+  border: 1px solid rgba(130, 176, 217, 0.25);
+  border-radius: 50%;
+
+  background: rgba(8, 92, 166, 0.08);
+
+  text-decoration: none;
+
+  transition:
+    color 150ms ease,
+    background 150ms ease,
+    border-color 150ms ease,
+    transform 150ms ease;
+}
+
+.social-links a:hover {
+  color: var(--umrt-white);
+  background: var(--umrt-blue);
+  border-color: var(--umrt-blue);
+  transform: translateY(-2px);
+}
+
+.social-links i {
+  font-size: 1.1rem;
+}
+
+.footer-address address {
+  margin: 0;
+
+  color: var(--umrt-light-grey);
+  font-style: normal;
+  line-height: 1.65;
+}
+
+.map-container {
+  width: 100%;
+  height: 220px;
+  margin-top: 1.25rem;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(130, 176, 217, 0.2);
+  border-radius: 10px;
+}
+
+.map-container iframe {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  border: 0;
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+  color: var(--umrt-grey);
+  font-size: 0.8rem;
+}
+
+.footer-bottom a {
+  color: var(--umrt-light-blue);
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  color: var(--umrt-white);
+}
+
+@media (max-width: 800px) {
+  .footer-main {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .footer-map {
+    grid-column: 1 / -1;
+  }
+
+  .map-container {
+    height: 220px;
+  }
+}
+
+@media (max-width: 550px) {
+  .footer-main {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-map {
+    grid-column: auto;
+  }
+}
+</style>

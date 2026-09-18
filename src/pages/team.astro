@@ -1,0 +1,120 @@
+---
+import { getCollection } from 'astro:content';
+
+import Layout from '@/layouts/Layout.astro';
+import PageIntro from '@/components/PageIntro.astro';
+import Section from '@/components/Section.astro';
+import PhotoShowcase from '@/components/PhotoShowcase.astro';
+import TeamMember from '@/components/TeamMember.astro';
+import TeamSystem from '@/components/TeamSystem.astro';
+
+
+const teamEntries = await getCollection('team');
+
+if (teamEntries.length !== 1) {
+  throw new Error(
+    `Expected exactly one team entry, found ${teamEntries.length}.`
+  );
+}
+
+const { executives, sections } = teamEntries[0].data;
+---
+
+<Layout
+  title="The Team"
+  description="Team and member information for UMRT."
+>
+  <PageIntro
+    title="The Team"
+    image="/assets/images/CIRC_Team_2526_1.jpg"
+  />
+
+  <Section theme="dark" radial>
+    <div class="prose">
+      <p>
+        Established in 2023, UMRT is a dynamic group of students united 
+        by a shared passion for robotics and innovation. Drawing talent 
+        from a diverse range of academic disciplines, the team primarily 
+        consists of members from the Engineering and Science faculties. 
+        Together, they leverage their unique skills and expertise to 
+        build effective robotics solutions for competitive challenges.
+      </p>
+    </div>
+  </Section>
+
+  <Section theme="deep-blue">
+    <PhotoShowcase directory="images/page_team" />
+  </Section>
+
+  <Section title="Executive Team" theme="grey" id="team">
+    <div class="team-member-list executive-list">
+      {
+        executives.map((member) => (
+          <TeamMember member={member} />
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section title="Section Leads" theme="grey">
+    <div class="section-leads-list">
+      {
+        sections.map((section) => (
+          <TeamSystem section={section} />
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section theme="deep-blue" title="Past Teams">
+    <div class="prose">
+      <p>
+        The current team builds on the work of previous members.
+        Historical leadership and member rosters are preserved in the
+        archive.
+      </p>
+
+      <div class="actions">
+        <a
+          class="btn btn-light"
+          href="/archive"
+        >
+          View archive
+        </a>
+      </div>
+    </div>
+  </Section>
+</Layout>
+
+<style>
+.team-member-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.executive-list {
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+.section-leads-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+@media (max-width: 700px) {
+  .team-member-list {
+    gap: 0.75rem;
+  }
+
+  .section-leads-list {
+    gap: 1.25rem;
+  }
+}
+</style>
