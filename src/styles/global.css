@@ -103,20 +103,6 @@ a {
   justify-content: center;
 }
 
-.rover-placeholder {
-  min-height: 300px;
-  display: grid;
-  place-items: center;
-  border: 1px dashed #ffffff88;
-  border-radius: 16px;
-  background:
-    radial-gradient(
-      circle at 50% 35%,
-      #5aa0e833,
-      #0001
-    );
-}
-
 .team-card {
   text-align: center;
 }
@@ -222,10 +208,6 @@ th {
   /* .hero {
     min-height: 55vh;
   } */
-
-  .section {
-    padding: 3.5rem 0;
-  }
 }
 
 
