@@ -53,6 +53,7 @@ const team = defineCollection({
       sections: z.array(
         z.object({
           name: z.string(),
+          icon: z.string(),
           description: z.string().optional(),
           leads: z.array(
             z.object({

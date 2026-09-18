@@ -12,6 +12,7 @@ interface Member {
 
 interface Section {
   name: string;
+  icon: string;
   description?: string;
   leads: Member[];
 }
@@ -25,14 +26,26 @@ const { section } = Astro.props;
 
 <section class="system-container">
   <header class="system-header">
+    <div class="system-accent" aria-hidden="true"></div>
+
     <div class="system-heading">
+      <span class="system-label">SECTION</span>
       <h3>{section.name}</h3>
+    </div>
+
+    <div class="system-mark" aria-hidden="true">
+      <i class={`bi bi-${section.icon}`}></i>
     </div>
   </header>
 
-  <div class="system-description">
-    {section.description}
-  </div>
+  {
+    section.description && (
+      <div class="system-description">
+        <div class="description-line" aria-hidden="true"></div>
+        <p>{section.description}</p>
+      </div>
+    )
+  }
 
   <div class="members-grid">
     {
@@ -44,120 +57,167 @@ const { section } = Astro.props;
 </section>
 
 <style>
-  .system-container {
-    overflow: hidden;
+.system-container {
+  position: relative;
+  overflow: hidden;
 
-    border: 1px solid rgba(255, 255, 255, 0.11);
-    border-radius: 14px;
+  border: 1px solid rgba(130, 176, 217, 0.18);
+  border-radius: 16px;
 
-    background:
-      linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.035),
-        rgba(255, 255, 255, 0.012)
-      );
+  background: var(--umrt-light-grey);
 
-    box-shadow:
-      0 8px 30px rgba(0, 0, 0, 0.1);
-  }
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.16),
+    0 2px 8px rgba(0, 0, 0, 0.08);
+}
 
+.system-header {
+  position: relative;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+
+  min-height: 78px;
+  padding: 1rem 1.35rem 1rem 1.5rem;
+
+  background: var(--umrt-deep-blue, #073359);
+
+  border-bottom: 1px solid rgba(130, 176, 217, 0.2);
+}
+
+.system-accent {
+  position: absolute;
+  inset: 0 auto 0 0;
+
+  width: 6px;
+
+  background: var(--umrt-blue, #085ca6);
+}
+
+.system-heading {
+  min-width: 0;
+  text-align: left;
+}
+
+.system-label {
+  display: block;
+
+  margin-bottom: 0.3rem;
+
+  color: var(--umrt-light-blue, #82b0d9);
+
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+h3 {
+  margin: 0;
+
+  color: var(--umrt-white, #fff);
+
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.system-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 42px;
+  height: 42px;
+
+  color: var(--umrt-light-blue);
+
+  font-size: 1.35rem;
+}
+
+.system-mark i {
+  display: block;
+
+  line-height: 1;
+
+  filter: drop-shadow(0 0 8px rgba(130, 176, 217, 0.25));
+}
+
+.system-description {
+  max-width: 850px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: stretch;
+  gap: 0.8rem;
+
+  padding: 1.15rem 1.35rem 0.25rem;
+
+  color: var(--umrt-light-grey, #d9dee5);
+}
+
+.description-line {
+  flex: 0 0 3px;
+
+  border-radius: 999px;
+
+  background: var(--umrt-blue, #085ca6);
+}
+
+.system-description p {
+  margin: 0;
+
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.members-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+
+  padding: 1.25rem 1rem 1.5rem;
+}
+
+@media (max-width: 700px) {
   .system-header {
-    position: relative;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-
-    padding: 1rem 1.25rem;
-
-    background:
-      linear-gradient(
-        90deg,
-        rgb(11, 27, 83),
-        rgba(127, 130, 179, 0.045) 80%,
-        transparent
-      );
-
-    border-bottom: 1px solid rgba(127, 179, 179, 0.25);
+    min-height: 68px;
+    padding: 0.9rem 1rem 0.9rem 1.2rem;
   }
 
-  .system-header::before {
-    content: '';
-
-    position: absolute;
-    inset: 0 auto 0 0;
-
-    width: 5px;
-
-    background: var(--primary, #7fb3b3);
-  }
-
-  .system-heading {
-    min-width: 0;
-  }
-
-  .system-eyebrow {
-    display: block;
-
-    margin-bottom: 0.15rem;
-
-    color: var(--primary, #7fb3b3);
-    font-size: 0.68rem;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+  .system-label {
+    font-size: 0.58rem;
   }
 
   h3 {
-    margin: 0;
+    font-size: 1.15rem;
+  }
 
-    color: #fff;
-    font-size: clamp(1.15rem, 2.2vw, 1.55rem);
-    font-weight: 800;
+  .system-mark {
+    padding: 0.5rem;
   }
 
   .system-description {
-    max-width: 850px;
-    margin: 0 auto;
-
-    padding: 1rem 1.25rem 0;
-
-    color: var(--muted, rgba(255, 255, 255, 0.68));
-    font-size: 0.88rem;
-    line-height: 1.5;
-    text-align: center;
+    padding: 1rem 1rem 0.2rem;
+    font-size: 0.82rem;
   }
 
   .members-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 1rem;
-
-    padding: 1.25rem 1rem 1.5rem;
+    gap: 0.65rem;
+    padding-inline: 0.6rem;
   }
+}
 
-  @media (max-width: 700px) {
-    .system-header {
-      padding: 0.9rem 1rem;
-    }
-
-    .system-description {
-      padding-inline: 1rem;
-      font-size: 0.8rem;
-    }
-
-    .members-grid {
-      gap: 0.65rem;
-      padding-inline: 0.5rem;
-    }
-  }
-
-  @media (max-width: 400px) {
-    .lead-count {
-      display: none;
-    }
-  }
+@media (max-width: 400px) {
+  /* .system-mark {
+    display: none;
+  } */
+}
 </style>
