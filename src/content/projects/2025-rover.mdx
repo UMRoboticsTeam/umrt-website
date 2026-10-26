@@ -1,0 +1,115 @@
+---
+program: rovers
+name: Project Perry
+season: "2024-2025"
+year: 2025
+summary: >
+  An open-frame rover with yellow wheels, a blue geared arm, CAN-based drive
+  commands, and separate control and camera links. Mission Control took on
+  science-task planning and underbody sampling-arm development.
+image: ../archive/2024-2025/images/IMG_3483.CR2.jpg
+imageAlt: Project Perry's teal chassis and yellow wheels in front of the UMRT team at CIRC 2025.
+systems:
+  - name: Chassis
+    description: >
+      A low teal frame carries the central equipment, with four yellow spoked
+      wheels mounted outside it. The open layout leaves the arm base and
+      electrical integration accessible during assembly and maintenance.
+      The field photograph shows the chassis without the main arm fitted;
+      the arm's assembled configuration appears in the Robotic Arm view.
+    specifications:
+      - label: Wheels
+        value: "4"
+    photo:
+      image: ../archive/2024-2025/images/IMG_3483.CR2.jpg
+      alt: Project Perry's open teal frame and four yellow spoked wheels at the field site.
+  - name: Robotic Arm
+    description: >
+      Project Perry's blue articulated arm combines exposed gears, a belt,
+      and a wired gripper. The season's controller implements CAN commands
+      for the stepper motors, a differential wrist calculation, and a servo
+      gripper. Its software configuration also includes a URDF model, RViz
+      visualisation, MoveIt 2 configuration, and an IKFast inverse-kinematics
+      plugin for arm development.
+    photo:
+      image: ../archive/2024-2025/images/IMG_7069.JPG
+      alt: Project Perry's blue arm, coloured gears, belt, and gripper wiring during maintenance.
+    links:
+      - label: Project Perry arm controller
+        href: https://github.com/UMRoboticsTeam/umrt-arm-ros-firmware/blob/022ad776c11b99c79ed5061d8feb1ff4520b5277/hardware/project_perry_controller.cpp
+      - label: Arm model and planning configuration
+        href: https://github.com/UMRoboticsTeam/umrt-project-perry-config/blob/f705767f9e93f0f9c2343f287643d6930ca29d53/README.md
+  - name: Communication Operations
+    description: >
+      The 2025 runtime documentation separates drivetrain, IMU, GPS, and
+      Geiger-counter traffic on 900 MHz links from serial and PoE camera
+      traffic on 2.4 GHz. Communication Operations brings these control,
+      telemetry, and video paths together at the base station, supporting
+      remote driving and the season's inspection tasks.
+    specifications:
+      - label: Control and telemetry
+        value: 900 MHz
+      - label: Camera traffic
+        value: 2.4 GHz
+    photo:
+      image: ../archive/2024-2025/images/IMG_3483.CR2.jpg
+      alt: Project Perry at CIRC 2025 with its upright mast hardware above the open frame.
+    links:
+      - label: 2025 runtime and radio layout
+        href: https://github.com/UMRoboticsTeam/umrt-rover/blob/9d6410f9b260566bc3e3770a4df27a8ebba69687/README.md
+  - name: Electrical
+    description: >
+      Electronics and power wiring are integrated between the frame rails,
+      with external cable runs following the arm to its motors and gripper.
+      This generation brings CAN motor commands into the drive and arm
+      interfaces, making the electrical connections between controllers,
+      actuators, and the rover computer part of the overall system design.
+    photo:
+      image: ../archive/2024-2025/images/IMG_7069.JPG
+      alt: Project Perry during maintenance, with controller wiring visible around the arm and chassis.
+  - name: Embedded
+    description: >
+      Project Perry's drivetrain interface packs four wheel-speed commands
+      into an eight-byte extended CAN message, replacing Prairie Pioneer's
+      PWM command path. The rover runtime groups drivetrain, IMU, GPS,
+      cameras, and Geiger-counter software into separate services. An
+      ESP32 servo-controller project from this season also receives CAN
+      angle commands and gradually moves a hobby servo to the requested position.
+    specifications:
+      - label: Drivetrain interface
+        value: Extended CAN
+      - label: Wheel-command message
+        value: 8 bytes for 4 wheel speeds
+    photo:
+      image: ../archive/2024-2025/images/IMG_7069.JPG
+      alt: Project Perry's arm and controller wiring during hardware integration.
+    links:
+      - label: 2025 drivetrain implementation
+        href: https://github.com/UMRoboticsTeam/umrt-drivetrain-ros/blob/786c5a5812cd3dda781328987ac2d89a5a688483/hardware/diffbot_system.cpp
+      - label: CAN servo-controller firmware
+        href: https://github.com/UMRoboticsTeam/umrt-servo-controller/blob/3b122807fecd979ef75ab03bdf9958cbc3b307b6/README.md
+  - name: Mission Control
+    description: >
+      Mission Control replaced Payload in the second-year section structure,
+      taking on science-task preparation and work on a servo-actuated scoop
+      arm beneath the rover. CIRC 2025's Boneyard Salvage Assessment brief
+      focused on identifying equipment, checking radiation and gas hazards,
+      recording locations and damage, and producing an inspection report.
+      The underbody scooper was a development effort alongside this science work.
+    links:
+      - label: 2025 science task brief
+        href: https://circ.cstag.ca/2025/tasks/#boneyard-salvage-assessment
+links:
+  - label: Project Perry configuration
+    href: https://github.com/UMRoboticsTeam/umrt-project-perry-config/tree/f705767f9e93f0f9c2343f287643d6930ca29d53
+  - label: 2025 rover runtime
+    href: https://github.com/UMRoboticsTeam/umrt-rover/tree/9d6410f9b260566bc3e3770a4df27a8ebba69687
+---
+
+Project Perry brought an open teal chassis and a blue geared arm to the
+2024–2025 season. The software moved the drivetrain to CAN commands and
+documented the arm's differential wrist, servo gripper, and planning tools.
+
+The season also separated camera traffic from control and sensor telemetry.
+Mission Control replaced the first-year Payload section, combining science-task
+preparation with development of a servo-actuated sampling arm under the chassis.

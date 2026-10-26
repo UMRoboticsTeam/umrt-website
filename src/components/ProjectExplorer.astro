@@ -1,0 +1,451 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import { getPrograms, getProjects } from '@/lib/projects';
+
+interface Props {
+  initialProgram?: string;
+  initialProject?: string;
+  id?: string;
+}
+
+const { initialProgram, initialProject, id = 'design-explorer' } = Astro.props;
+const [programs, projects] = await Promise.all([getPrograms(), getProjects()]);
+const initial = projects.find((project) => project.id === initialProject)
+  ?? projects.find((project) => !initialProgram || project.data.program.id === initialProgram)
+  ?? projects[0];
+const selectedKey = initial ? `${initial.data.program.id}/${initial.id}` : '';
+const viewId = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const systemIcons: Record<string, string> = {
+  Embedded: 'cpu',
+  'Communication Operations': 'broadcast-pin',
+  Electrical: 'lightning-charge',
+  Chassis: 'bounding-box',
+  'Robotic Arm': 'wrench-adjustable',
+  'Mission Control': 'display',
+  Payload: 'box-seam',
+};
+
+const designs = await Promise.all(projects.map(async (project) => {
+  const { Content } = await render(project);
+  const program = programs.find((entry) => entry.id === project.data.program.id)!;
+  const systems = project.data.systems.filter((system) => system.description || system.specifications.length > 0 || system.photo);
+  const viewIds = new Set(['overview']);
+  for (const system of systems) {
+    const systemId = viewId(system.name);
+    if (!systemId || viewIds.has(systemId)) {
+      throw new Error(`Project "${project.id}" has a duplicate or invalid design section: "${system.name}".`);
+    }
+    viewIds.add(systemId);
+  }
+  return { project, program, Content, systems };
+}));
+---
+
+<project-explorer id={id} class="design-explorer" role="region" aria-label="Robot design explorer" data-initial-project={selectedKey}>
+  <div class="explorer-bar">
+    <span class="library-label"><i class="bi bi-folder2-open" aria-hidden="true"></i> UMRT <span aria-hidden="true">/</span> Design Library</span>
+    <span class="design-count">{projects.length} {projects.length === 1 ? 'design' : 'designs'}</span>
+  </div>
+
+  <div class="explorer-workspace">
+    <nav class="explorer-sidebar" aria-label="Programs and seasons">
+      <p class="sidebar-heading">Programs</p>
+      <div class="program-folders">
+        {programs.map((program) => {
+          const entries = projects.filter((project) => project.data.program.id === program.id);
+          return (
+            <details class="program-folder" open={program.id === initial?.data.program.id || !initial}>
+              <summary>
+                <i class="bi bi-chevron-right folder-chevron" aria-hidden="true"></i>
+                <i class="bi bi-folder2 folder-icon" aria-hidden="true"></i>
+                <span>{program.data.name}</span>
+                <span class="folder-count">{entries.length}</span>
+              </summary>
+              <ul class="season-list">
+                {entries.map((project) => {
+                  const key = `${program.id}/${project.id}`;
+                  return (
+                    <li>
+                      <button type="button" class="season-button" data-project-select={key} aria-pressed={key === selectedKey} aria-controls={`${id}-${project.id}`}>
+                        <i class="bi bi-file-earmark-text" aria-hidden="true"></i>
+                        <span><span class="season-label">{project.data.season.replace('-', '–')}</span><span class="season-name">{project.data.name}</span></span>
+                        <span class="selection-mark" aria-hidden="true"></span>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+              {entries.length === 0 && <p class="empty-folder">Designs coming soon.</p>}
+            </details>
+          );
+        })}
+      </div>
+      <div class="sidebar-note"><i class="bi bi-cursor" aria-hidden="true"></i><p>Pick a season.<br />Explore the engineering.</p></div>
+    </nav>
+
+    <div class="design-viewer">
+      {designs.map(({ project, program, Content, systems }) => {
+        const key = `${program.id}/${project.id}`;
+        const views = [
+          { name: 'Overview', id: 'overview', icon: 'grid-1x2' },
+          ...systems.map((system) => ({ name: system.name, id: viewId(system.name), icon: systemIcons[system.name] ?? 'gear' })),
+        ];
+        return (
+          <article id={`${id}-${project.id}`} class="design-project" data-project-panel={key} data-project-name={project.data.name} data-project-season={project.data.season} hidden={key !== selectedKey}>
+            <header class="design-header">
+              <p class="design-path"><i class="bi bi-folder2-open" aria-hidden="true"></i> {program.data.name}<span aria-hidden="true">/</span>{project.data.season.replace('-', '–')}</p>
+              <h3>{project.data.name}</h3>
+              <p class="design-summary">{project.data.summary}</p>
+            </header>
+
+            <div class="design-tabs" role="tablist" aria-label={`${project.data.name} design sections`}>
+              {views.map((view, index) => (
+                <button type="button" role="tab" id={`${id}-${project.id}-tab-${view.id}`} aria-controls={`${id}-${project.id}-view-${view.id}`} aria-selected={index === 0} tabindex={index === 0 ? 0 : -1} data-design-tab={view.id}>
+                  <i class={`bi bi-${view.icon}`} aria-hidden="true"></i>{view.name}
+                </button>
+              ))}
+            </div>
+
+            <div class="design-content">
+              <div class="design-view" role="tabpanel" id={`${id}-${project.id}-view-overview`} aria-labelledby={`${id}-${project.id}-tab-overview`} data-design-view="overview" tabindex="0">
+                <figure class="design-figure">
+                  <Image src={project.data.image} alt={project.data.imageAlt} widths={[480, 800, 1200]} sizes="(max-width: 760px) calc(100vw - 4rem), 800px" loading="lazy" />
+                  <figcaption><span>{project.data.name}</span><span>{project.data.season.replace('-', '–')}</span></figcaption>
+                </figure>
+                <div class="view-copy">
+                  <h4>Design Overview</h4>
+                  <div class="overview-copy"><Content /></div>
+                  {project.data.specifications.length > 0 && (
+                    <div class="design-specs"><table><caption>Specifications</caption><tbody>
+                      {project.data.specifications.map((spec) => <tr><th scope="row">{spec.label}</th><td>{spec.value}</td></tr>)}
+                    </tbody></table></div>
+                  )}
+                  {project.data.links.length > 0 && (
+                    <div class="technical-links">{project.data.links.map((link) => <a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}>{link.label} <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>)}</div>
+                  )}
+                </div>
+              </div>
+
+              {systems.map((system) => (
+                <div class="design-view" role="tabpanel" id={`${id}-${project.id}-view-${viewId(system.name)}`} aria-labelledby={`${id}-${project.id}-tab-${viewId(system.name)}`} data-design-view={viewId(system.name)} tabindex="0" hidden>
+                  {system.photo ? (
+                    <figure class="design-figure subsystem-figure">
+                      <Image src={system.photo.image} alt={system.photo.alt} widths={[480, 800, 1200]} sizes="(max-width: 760px) calc(100vw - 4rem), 800px" loading="lazy" />
+                      <figcaption><span>{system.name}</span><span>{project.data.season.replace('-', '–')}</span></figcaption>
+                    </figure>
+                  ) : (
+                    <figure class="design-figure subsystem-figure">
+                      <Image src={project.data.image} alt={project.data.imageAlt} widths={[480, 800, 1200]} sizes="(max-width: 760px) calc(100vw - 4rem), 800px" loading="lazy" />
+                      <figcaption><span>{project.data.name} overview</span><span>{project.data.season.replace('-', '–')}</span></figcaption>
+                    </figure>
+                  )}
+                  <div class="view-copy">
+                    <h4>{system.name}</h4>
+                    {system.description && <p class="system-description">{system.description}</p>}
+                    {system.specifications.length > 0 && (
+                      <div class="design-specs"><table><caption>{system.name} specifications</caption><tbody>
+                        {system.specifications.map((spec) => <tr><th scope="row">{spec.label}</th><td>{spec.value}</td></tr>)}
+                      </tbody></table></div>
+                    )}
+                    {system.links.length > 0 && (
+                      <div class="technical-links">{system.links.map((link) => <a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}>{link.label} <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>)}</div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </article>
+        );
+      })}
+      {projects.length === 0 && <div class="empty-library"><i class="bi bi-folder2" aria-hidden="true"></i><h3>Our design library</h3><p>Robot designs will appear here as our programs develop.</p></div>}
+    </div>
+  </div>
+  <p class="explorer-status" role="status" aria-live="polite" data-explorer-status></p>
+</project-explorer>
+
+<div class="explorer-people">
+  <p>The people behind the projects</p>
+  <div class="actions">
+    <a class="btn btn-light" href="/team">Current Team</a>
+    <a class="btn btn-outline" href="/archive">View Team List Archive</a>
+  </div>
+</div>
+
+<noscript><p class="explorer-noscript">Enable JavaScript to switch designs and explore the technical sections.</p></noscript>
+
+<script>
+  class ProjectExplorer extends HTMLElement {
+    private cleanup?: () => void;
+
+    connectedCallback() {
+      const panels = Array.from(this.querySelectorAll<HTMLElement>('[data-project-panel]'));
+      const selectors = Array.from(this.querySelectorAll<HTMLButtonElement>('[data-project-select]'));
+      const status = this.querySelector<HTMLElement>('[data-explorer-status]');
+      const initialKey = this.dataset.initialProject ?? '';
+      let activeKey = initialKey;
+
+      const revealHorizontally = (element: HTMLElement, container: HTMLElement | null) => {
+        if (!container || container.scrollWidth <= container.clientWidth) return;
+        const item = element.getBoundingClientRect();
+        const bounds = container.getBoundingClientRect();
+        if (item.left < bounds.left || item.right > bounds.right) {
+          container.scrollLeft += item.left - bounds.left - (container.clientWidth - item.width) / 2;
+        }
+      };
+
+      const revealSelection = () => {
+        const button = selectors.find((item) => item.dataset.projectSelect === activeKey);
+        if (button) revealHorizontally(button, button.closest<HTMLElement>('.season-list'));
+        const panel = panels.find((item) => item.dataset.projectPanel === activeKey);
+        const tab = panel?.querySelector<HTMLButtonElement>('[aria-selected="true"]');
+        if (tab) revealHorizontally(tab, tab.closest<HTMLElement>('.design-tabs'));
+      };
+
+      const select = (key: string, view = 'overview', historyMode: 'push' | 'replace' | false = false) => {
+        const panel = panels.find((item) => item.dataset.projectPanel === key);
+        if (!panel) return false;
+        const tabs = Array.from(panel.querySelectorAll<HTMLButtonElement>('[data-design-tab]'));
+        const selectedTab = tabs.find((tab) => tab.dataset.designTab === view) ?? tabs[0];
+        const selectedView = selectedTab?.dataset.designTab ?? 'overview';
+        const focused = document.activeElement;
+        const focusedPanel = panels.find((item) => focused && item.contains(focused));
+        const focusedView = focused instanceof Element ? focused.closest<HTMLElement>('[data-design-view]') : null;
+        const restoreFocus = focusedPanel && (
+          focusedPanel !== panel || (focusedView && focusedView.dataset.designView !== selectedView)
+        );
+
+        panels.forEach((item) => { item.hidden = item !== panel; });
+        selectors.forEach((button) => {
+          const selected = button.dataset.projectSelect === key;
+          button.setAttribute('aria-pressed', String(selected));
+          if (selected) {
+            const folder = button.closest('details');
+            if (folder) folder.open = true;
+          }
+        });
+        tabs.forEach((tab) => {
+          const selected = tab === selectedTab;
+          tab.setAttribute('aria-selected', String(selected));
+          tab.tabIndex = selected ? 0 : -1;
+        });
+        panel.querySelectorAll<HTMLElement>('[data-design-view]').forEach((item) => {
+          item.hidden = item.dataset.designView !== selectedView;
+        });
+        const content = panel.querySelector<HTMLElement>('.design-content');
+        if (content) content.scrollTop = 0;
+        activeKey = key;
+        revealSelection();
+        if (restoreFocus) selectedTab?.focus({ preventScroll: true });
+        if (status) status.textContent = `${panel.dataset.projectName}, ${panel.dataset.projectSeason}, ${selectedTab?.textContent?.trim()}.`;
+
+        if (historyMode) {
+          const hash = `#design=${key.split('/').map(encodeURIComponent).join('/')}/${encodeURIComponent(selectedView)}`;
+          if (window.location.hash !== hash) {
+            const url = `${window.location.pathname}${window.location.search}${hash}`;
+            if (historyMode === 'push') window.history.pushState(null, '', url);
+            else window.history.replaceState(null, '', url);
+          }
+        }
+        return true;
+      };
+
+      const readHash = () => {
+        const selection = new URLSearchParams(window.location.hash.slice(1)).get('design');
+        if (!selection) return select(initialKey);
+        const [program, project, view] = selection.split('/');
+        return select(`${program}/${project}`, view);
+      };
+
+      const onClick = (event: MouseEvent) => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+        const selector = target.closest<HTMLButtonElement>('[data-project-select]');
+        if (selector) {
+          select(selector.dataset.projectSelect ?? '', 'overview', 'push');
+          return;
+        }
+        const tab = target.closest<HTMLButtonElement>('[data-design-tab]');
+        if (tab) select(activeKey, tab.dataset.designTab, 'replace');
+      };
+
+      const onKeydown = (event: KeyboardEvent) => {
+        const target = event.target;
+        if (!(target instanceof HTMLButtonElement) || !target.hasAttribute('data-design-tab')) return;
+        const list = target.closest('[role="tablist"]');
+        if (!list) return;
+        const tabs = Array.from(list.querySelectorAll<HTMLButtonElement>('[data-design-tab]'));
+        const index = tabs.indexOf(target);
+        let next = index;
+        if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+        else if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = tabs.length - 1;
+        else return;
+        event.preventDefault();
+        tabs[next].focus();
+        tabs[next].click();
+        revealSelection();
+      };
+
+      this.addEventListener('click', onClick);
+      this.addEventListener('keydown', onKeydown);
+      window.addEventListener('popstate', readHash);
+      window.addEventListener('hashchange', readHash);
+      window.addEventListener('resize', revealSelection);
+      this.cleanup = () => {
+        this.removeEventListener('click', onClick);
+        this.removeEventListener('keydown', onKeydown);
+        window.removeEventListener('popstate', readHash);
+        window.removeEventListener('hashchange', readHash);
+        window.removeEventListener('resize', revealSelection);
+      };
+      if (readHash() && new URLSearchParams(window.location.hash.slice(1)).has('design')) {
+        requestAnimationFrame(() => {
+          window.scrollTo({ top: window.scrollY + this.getBoundingClientRect().top - 96, behavior: 'instant' });
+        });
+      }
+    }
+
+    disconnectedCallback() { this.cleanup?.(); }
+  }
+
+  if (!customElements.get('project-explorer')) customElements.define('project-explorer', ProjectExplorer);
+</script>
+
+<style>
+  .design-explorer {
+    --explorer-height: 620px;
+    display: block;
+    overflow: hidden;
+    text-align: left;
+    border: 1px solid rgba(130, 176, 217, 0.35);
+    border-radius: 14px;
+    background: var(--umrt-dark-blue);
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.18);
+    scroll-margin-top: 90px;
+  }
+  [hidden] { display: none !important; }
+  button { font: inherit; }
+  .explorer-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 1.25rem;
+    color: #d4e3f0;
+    background: #152c46;
+    border-bottom: 1px solid rgba(130, 176, 217, 0.2);
+    font-size: 0.8rem;
+  }
+  .library-label { display: flex; align-items: center; gap: 0.7rem; font-weight: 650; }
+  .library-label > i { color: var(--umrt-light-blue); font-size: 1rem; }
+  .library-label > span { color: #82b0d980; }
+  .design-count { color: #a6bed3; white-space: nowrap; }
+  .explorer-workspace { display: grid; grid-template-columns: 250px minmax(0, 1fr); }
+  .explorer-sidebar {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    max-height: var(--explorer-height);
+    padding: 1.5rem 0.75rem;
+    color: #e4edf5;
+    background: #102740;
+    border-right: 1px solid rgba(130, 176, 217, 0.18);
+  }
+  .sidebar-heading { margin: 0 0 1rem 0.75rem; font-size: 0.75rem; font-weight: 700; color: #9bb6ce; }
+  .program-folders { overflow-y: auto; min-height: 0; }
+  .program-folder + .program-folder { margin-top: 0.75rem; }
+  .program-folder summary { display: flex; align-items: center; gap: 0.55rem; min-height: 44px; padding: 0.5rem 0.6rem; border-radius: 6px; list-style: none; cursor: pointer; font-size: 0.9rem; font-weight: 700; }
+  .program-folder summary::-webkit-details-marker { display: none; }
+  .program-folder summary:hover { background: #ffffff09; }
+  .folder-chevron { font-size: 0.65rem; color: #9bb6ce; transition: transform 150ms ease; }
+  .program-folder[open] .folder-chevron { transform: rotate(90deg); }
+  .folder-icon { color: var(--umrt-light-blue); font-size: 1.05rem; }
+  .folder-count { margin-left: auto; color: #9bb6ce; font-size: 0.75rem; font-weight: 500; }
+  .season-list { margin: 0.35rem 0 0 1rem; padding: 0 0 0 0.5rem; list-style: none; border-left: 1px solid #82b0d935; }
+  .season-list li + li { margin-top: 0.35rem; }
+  .season-button { display: flex; align-items: flex-start; gap: 0.6rem; width: 100%; min-height: 66px; padding: 0.65rem; border: 1px solid transparent; border-radius: 6px; background: transparent; color: #d1dfeb; text-align: left; cursor: pointer; }
+  .season-button > i { padding-top: 0.1rem; color: #829db5; font-size: 0.9rem; }
+  .season-label, .season-name { display: block; }
+  .season-label { font-size: 0.85rem; font-weight: 650; line-height: 1.4; }
+  .season-name { margin-top: 0.15rem; color: #9bb6ce; font-size: 0.72rem; }
+  .season-button:hover { background: #82b0d90d; }
+  .season-button[aria-pressed='true'] { background: #82b0d91c; border-color: #82b0d94d; color: white; }
+  .season-button[aria-pressed='true'] > i { color: var(--umrt-light-blue); }
+  .selection-mark { display: none; width: 5px; height: 5px; flex-shrink: 0; margin: 0.45rem 0 0 auto; border-radius: 50%; background: var(--umrt-light-blue); }
+  .season-button[aria-pressed='true'] .selection-mark { display: block; }
+  .sidebar-note { display: flex; gap: 0.65rem; margin: auto 0.75rem 0; padding-top: 2.5rem; color: #91acc3; font-size: 0.75rem; }
+  .sidebar-note i { margin-top: 0.15rem; }
+  .sidebar-note p { margin: 0; }
+  .empty-folder { margin: 0.5rem 1rem; color: #9bb6ce; font-size: 0.8rem; }
+  .design-viewer { min-width: 0; height: var(--explorer-height); background: var(--umrt-off-white); color: var(--umrt-dark-blue); }
+  .design-project { display: flex; flex-direction: column; height: 100%; min-width: 0; }
+  .design-header { flex-shrink: 0; padding: 1.5rem 2rem 1.15rem; background: white; }
+  .design-path { display: flex; align-items: center; gap: 0.6rem; margin: 0 0 0.75rem; color: #62758a; font-size: 0.75rem; }
+  .design-path i { color: var(--umrt-blue); }
+  .design-path > span { color: #a1afbd; }
+  .design-header h3 { margin: 0; font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.2; font-weight: 750; }
+  .design-summary { margin: 0.65rem 0 0; max-width: 740px; color: #53677b; font-size: 0.875rem; line-height: 1.6; }
+  .design-tabs { display: flex; flex-shrink: 0; min-width: 0; overflow-x: auto; overflow-y: hidden; gap: 0.25rem; padding: 0 1.5rem; background: white; border-bottom: 1px solid #d9e1e9; scrollbar-width: none; }
+  .design-tabs::-webkit-scrollbar, .season-list::-webkit-scrollbar { display: none; }
+  .design-tabs button { display: flex; align-items: center; gap: 0.45rem; flex-shrink: 0; min-height: 49px; padding: 0.75rem; margin-bottom: -1px; border: 0; border-bottom: 3px solid transparent; background: transparent; color: #607286; white-space: nowrap; cursor: pointer; font-size: 0.77rem; font-weight: 650; }
+  .design-tabs button:hover { color: var(--umrt-blue); background: #f5f7fa; }
+  .design-tabs button[aria-selected='true'] { border-bottom-color: var(--umrt-blue); color: var(--umrt-blue); }
+  .design-content { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior-y: contain; scrollbar-width: thin; scrollbar-color: #b5c4d1 transparent; }
+  .design-view { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 1.5rem; align-items: start; padding: 1.5rem 2rem 2rem; }
+  .view-copy { min-width: 0; }
+  .design-view:focus-visible { outline-offset: -3px; }
+  .design-figure { margin: 0; overflow: hidden; border-radius: 8px; background: #e4eaf0; }
+  .design-figure img { display: block; width: 100%; height: 300px; object-fit: contain; }
+  .subsystem-figure img { height: 300px; }
+  .design-figure figcaption { display: flex; justify-content: space-between; gap: 1rem; padding: 0.55rem 0.8rem; border-top: 1px solid #d6e0e9; color: #596d80; font-size: 0.7rem; background: #edf1f5; }
+  .overview-copy { color: #43596e; font-size: 0.9rem; line-height: 1.75; }
+  .overview-copy :global(p) { margin: 0 0 1rem; }
+  .overview-copy :global(a) { color: var(--umrt-blue); }
+  .overview-copy :global(img) { max-width: 100%; height: auto; }
+  .design-view h4 { margin: 0 0 0.6rem; font-size: 1.2rem; }
+  .system-description { margin: 0; font-size: 0.95rem; color: #43596e; line-height: 1.75; }
+  .design-specs { margin-top: 1.5rem; overflow-x: auto; }
+  .design-specs caption { text-align: left; font-weight: 700; padding-bottom: 0.5rem; }
+  .design-specs th, .design-specs td { border-color: #d9e1e9; font-size: 0.85rem; }
+  .technical-links { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; }
+  .technical-links a { color: var(--umrt-blue); font-size: 0.85rem; font-weight: 700; text-underline-offset: 0.2em; }
+  .empty-library { padding: 3rem; text-align: center; }
+  .empty-library > i { font-size: 3rem; color: #829db5; }
+  .explorer-status { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  .explorer-people { margin-top: 2rem; }
+  .explorer-people > p { margin: 0; color: var(--umrt-light-grey); font-size: 0.9rem; }
+  .explorer-people .actions { margin-top: 0.85rem; }
+  .explorer-noscript { font-size: 0.9rem; }
+  button:focus-visible, summary:focus-visible, .design-view:focus-visible { outline: 3px solid var(--umrt-light-blue); outline-offset: -3px; }
+  @media (max-width: 960px) {
+    .explorer-workspace { grid-template-columns: 220px minmax(0, 1fr); }
+    .design-header { padding: 1.25rem; }
+    .design-tabs { padding-inline: 0.75rem; }
+    .design-view { grid-template-columns: 1fr; padding: 1.25rem; }
+  }
+  @media (max-width: 760px) {
+    .design-explorer { --explorer-height: 720px; }
+    .explorer-bar { padding: 0.8rem 1rem; }
+    .library-label { gap: 0.45rem; font-size: 0.75rem; }
+    .design-count { font-size: 0.7rem; }
+    .explorer-workspace { grid-template-columns: 1fr; }
+    .explorer-sidebar { max-height: 260px; padding: 0.75rem; border-right: 0; border-bottom: 1px solid #82b0d935; }
+    .sidebar-heading, .sidebar-note { display: none; }
+    .season-list { display: flex; gap: 0.4rem; margin: 0.25rem 0 0; padding: 0; border: 0; overflow-x: auto; padding-bottom: 0.2rem; scrollbar-width: none; }
+    .season-list li { flex: 0 0 auto; }
+    .season-list li + li { margin-top: 0; }
+    .season-button { min-width: 150px; min-height: 64px; }
+    .season-button > i { display: none; }
+    .design-header { padding: 1.25rem 1rem 0.85rem; }
+    .design-path { font-size: 0.7rem; }
+    .design-summary { font-size: 0.8rem; }
+    .design-tabs { padding-inline: 0.35rem; }
+    .design-view { padding: 1rem; }
+    .design-figure img, .subsystem-figure img { height: 260px; }
+    .overview-copy, .system-description { font-size: 0.85rem; }
+    .explorer-people .btn { font-size: 0.85rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .folder-chevron { transition: none; } }
+</style>

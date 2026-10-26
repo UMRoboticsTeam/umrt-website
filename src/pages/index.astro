@@ -34,8 +34,20 @@ import VoxelRover from '@/components/VoxelRover.astro';
     </div>
   </Section>
 
-  <Section theme="surface-light" radial>
-    <VoxelRover />
+  <Section theme="surface-light" title="Our Projects" radial>
+    <div class="prose">
+      <p>
+        Explore the rovers we've built, from our first competition platform
+        to the designs that followed. Each season builds on the work of
+        the students who came before.
+      </p>
+      <div class="actions">
+        <a class="btn btn-light" href="/projects">Explore our projects</a>
+      </div>
+    </div>
+    <div class="project-animation">
+      <VoxelRover />
+    </div>
   </Section>
 
   <Section theme="deep-blue" title="Join Us" id="join">
@@ -77,6 +89,10 @@ import VoxelRover from '@/components/VoxelRover.astro';
 </Layout>
 
 <style>
+.project-animation {
+  margin-top: 2rem;
+}
+
 .main-header {
   font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   text-transform: uppercase;

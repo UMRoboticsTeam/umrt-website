@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import PageIntro from '@/components/PageIntro.astro';
+import Section from '@/components/Section.astro';
+import ProjectExplorer from '@/components/ProjectExplorer.astro';
+import { getPrograms } from '@/lib/projects';
+
+export async function getStaticPaths() {
+  const programs = await getPrograms();
+  return programs.map((program) => ({
+    params: { program: program.id },
+    props: { program },
+  }));
+}
+
+interface Props {
+  program: CollectionEntry<'programs'>;
+}
+
+const { program } = Astro.props;
+---
+
+<Layout title="Projects" description="Explore UMRT's robotics programs and the designs behind our robots.">
+  <PageIntro title="Projects" image={program.data.image} />
+
+  <Section title="Explore Our Designs" theme="deep-blue" id="designs">
+    <ProjectExplorer initialProgram={program.id} />
+  </Section>
+</Layout>

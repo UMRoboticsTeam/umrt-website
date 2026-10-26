@@ -1,0 +1,27 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageIntro from '@/components/PageIntro.astro';
+import Section from '@/components/Section.astro';
+import ProjectExplorer from '@/components/ProjectExplorer.astro';
+import { getPrograms } from '@/lib/projects';
+
+const programs = await getPrograms();
+---
+
+<Layout title="Projects" description="Explore UMRT's robotics programs and the designs behind our robots.">
+  <PageIntro title="Projects" image={programs[0]?.data.image} />
+
+  <Section theme="dark" radial>
+    <div class="prose">
+      <p>
+        Our projects bring mechanical design, electronics, and software
+        together in working robots. Explore our programs to see the robots
+        we build and the engineering behind them.
+      </p>
+    </div>
+  </Section>
+
+  <Section title="Explore Our Designs" theme="deep-blue" id="designs">
+    <ProjectExplorer />
+  </Section>
+</Layout>

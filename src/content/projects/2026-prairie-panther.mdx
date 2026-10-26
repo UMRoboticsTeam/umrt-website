@@ -1,0 +1,110 @@
+---
+program: rovers
+name: Prairie Panther
+season: "2025-2026"
+year: 2026
+summary: >
+  An iteration of the rover platform with a pink equipment enclosure, exposed
+  suspension linkages, and an articulated arm. The season's development also
+  covered CAN-connected actuators, soil sensing, and science-task preparation.
+image: ../archive/2025-2026/images/IMG_3975.JPG
+imageAlt: Prairie Panther with its pink enclosure, wide wheel stance, and mast hardware at a rover showcase.
+systems:
+  - name: Chassis
+    description: >
+      Four large rounded tyres sit outside the central chassis. Cutout wheel
+      linkages and exposed coil springs connect the wheel assemblies to the
+      body, while the wide stance leaves room for the equipment bay and arm
+      mount. Pink side panels and a transparent top panel define the central enclosure.
+    specifications:
+      - label: Wheels
+        value: "4"
+      - label: Visible suspension elements
+        value: Linkages and coil springs
+    photo:
+      image: ../archive/2025-2026/images/IMG_6441.jpg
+      alt: Prairie Panther's four widely spaced tyres, cutout wheel linkages, coil springs, and central equipment enclosure.
+  - name: Robotic Arm
+    description: >
+      A long pink articulated arm rises from the central body and ends in a
+      blue gripper. The shared arm-software work published during this season
+      added a ROS 2 joint trajectory controller and joint-state broadcaster,
+      with position and velocity interfaces. That configuration documents
+      the season's control development alongside the physical arm shown here.
+    photo:
+      image: ../archive/2025-2026/images/IMG_3936.JPG
+      alt: Prairie Panther's articulated arm, blue gripper, and attached controller wiring in profile at the field site.
+    links:
+      - label: 2026 arm-controller development
+        href: https://github.com/UMRoboticsTeam/umrt-arm-ros-firmware/blob/6a68ef9a6754a76f6e8b812f2b36f5905306d44a/bringup/config/umrt_arm_controllers.yaml
+  - name: Communication Operations
+    description: >
+      Upright antenna and radio hardware mount above the equipment enclosure,
+      around the central body. Communication Operations covers the rover-to-base-station
+      link and operator setup, keeping driving commands, video, and sensor
+      information available to the field team. The showcase photo shows the
+      radio and mast arrangement on this version of the rover.
+    photo:
+      image: ../archive/2025-2026/images/IMG_3975.JPG
+      alt: Prairie Panther's upright radio and antenna mast hardware above its central enclosure.
+  - name: Electrical
+    description: >
+      The central enclosure houses the equipment wiring under a transparent
+      top panel, with an emergency-stop button on its upper edge. Published
+      electrical development from this season also includes a KiCad CAN-to-servo
+      board based on a PIC18F25K83, providing two hobby-servo outputs controlled
+      by J1939-style CAN commands.
+    photo:
+      image: ../archive/2025-2026/images/IMG_6441.jpg
+      alt: Prairie Panther's equipment enclosure viewed from above, with internal wiring beneath the clear top panel.
+    links:
+      - label: CAN-to-servo board design
+        href: https://github.com/UMRoboticsTeam/umrt-can-ppm-gateway/blob/1f92df6fcdc03762687d6cf707ecb3192f1e1b27/README.md
+  - name: Embedded
+    description: >
+      The season's science-sensor firmware uses an ESP32 to read soil
+      temperature, humidity, electrical conductivity, and pH over RS485.
+      It checks message integrity using CRC16, then sends scaled readings
+      over extended CAN. This documents the development of a sensor-to-rover
+      interface for the science work, alongside continuing arm-control integration.
+    specifications:
+      - label: Soil-sensor firmware MCU
+        value: ESP32
+      - label: Sensor interface
+        value: RS485 through MAX485
+      - label: Rover data interface
+        value: Extended CAN
+    photo:
+      image: ../archive/2025-2026/images/IMG_3936.JPG
+      alt: Prairie Panther's arm-mounted controller board and routed cables during field integration.
+    links:
+      - label: 2026 soil-sensor firmware
+        href: https://github.com/UMRoboticsTeam/umrt-soil-sensor-firmware/blob/a4ff2184ecd1e5b6e95ab640ce733dc17f5a1ee2/README.md
+  - name: Mission Control
+    description: >
+      Mission Control continued science-task preparation and work on the
+      servo-actuated scoop arm beneath the rover. CIRC 2026's Exploration
+      Proposal brief combined site photographs, GPS and route records, soil
+      sampling, experiments, and a written report. The scoop work addresses
+      sample collection near ground level, while the season's soil-sensor
+      firmware supports the investigation side of the project.
+    links:
+      - label: 2026 science task brief
+        href: https://circ.cstag.ca/2026/tasks/#exploration-proposal
+      - label: Soil-sensor implementation
+        href: https://github.com/UMRoboticsTeam/umrt-soil-sensor-firmware/blob/a4ff2184ecd1e5b6e95ab640ce733dc17f5a1ee2/README.md
+links:
+  - label: 2026 soil-sensor development
+    href: https://github.com/UMRoboticsTeam/umrt-soil-sensor-firmware/tree/a4ff2184ecd1e5b6e95ab640ce733dc17f5a1ee2
+  - label: CAN actuator-board development
+    href: https://github.com/UMRoboticsTeam/umrt-can-ppm-gateway/tree/1f92df6fcdc03762687d6cf707ecb3192f1e1b27
+---
+
+Prairie Panther is the 2025–2026 iteration of UMRT's rover platform. Its pink
+equipment enclosure sits between widely spaced wheel assemblies with exposed
+linkages and coil springs; the arm and communications masts extend above it.
+
+Alongside the physical rover, the season's published engineering work developed
+joint-trajectory arm control, CAN-connected servo hardware, and an RS485 soil
+sensor interface. Mission Control continued the science-task and underbody
+sampling-arm work introduced in the previous season.

@@ -1,0 +1,110 @@
+---
+program: rovers
+name: Prairie Pioneer
+season: "2023-2024"
+year: 2024
+summary: >
+  Our first competition rover paired a four-wheel chassis and stepper-driven
+  arm with ROS 2 control, camera and GPS integration, and a dedicated Payload section.
+image: ../archive/2023-2024/images/field.jpg
+imageAlt: Prairie Pioneer with its white enclosure, raised arm, and antenna mast in the Drumheller badlands.
+systems:
+  - name: Chassis
+    description: >
+      A rectangular frame built from aluminium extrusion carries four wheels,
+      the electronics deck, and the arm mount. White panels enclose the equipment
+      in the field configuration, while the elevated arm and antenna mast sit
+      above the chassis. The open assembly photos show the mounting rails and
+      space reserved for wiring and power distribution.
+    specifications:
+      - label: Wheels
+        value: "4"
+      - label: Frame construction
+        value: Aluminium extrusion
+    photo:
+      image: ./images/2024-electronics-layout.jpg
+      alt: Prairie Pioneer's open aluminium frame, wheel mounts, and internal equipment deck during assembly.
+  - name: Robotic Arm
+    description: >
+      The top-mounted articulated arm ends in a gripper for manipulating task
+      equipment. Its 2024 control library used Firmata to communicate with an
+      Arduino, with commands for stepper speed, fixed step moves, and gripper
+      servo position. This was the Arduino-based arm-control generation used
+      on Prairie Pioneer.
+    photo:
+      image: ../archive/2023-2024/images/build.jpg
+      alt: Prairie Pioneer's arm prototype with its large base gear, linked sections, and gripper during assembly.
+    links:
+      - label: 2024 arm-control library
+        href: https://github.com/UMRoboticsTeam/umrt-arm-firmware-lib/blob/dd2538e125d9a74b2341b8e07a88c7a66a2d196c/StepperController.h
+  - name: Communication Operations
+    description: >
+      Communication Operations connected the rover's antenna mast to a portable
+      ground setup with a mast-mounted directional panel antenna. The 2024
+      base-station launch configuration brought together joystick input and
+      video decoding, while the rover's peripheral launch handled a DepthAI
+      camera and serial GPS. The field photos show the directional panel
+      antenna being positioned at the task site.
+    photo:
+      image: ../archive/2023-2024/images/PXL_20240810_164238081.jpg
+      alt: UMRT members positioning a square directional panel antenna on a portable mast at CIRC 2024.
+    links:
+      - label: 2024 base-station launch
+        href: https://github.com/UMRoboticsTeam/umrt-ros/blob/47211bff4b9fc2855c530b28ccef6df13655ec44/launch/base_station.launch.py
+      - label: Camera and GPS launch
+        href: https://github.com/UMRoboticsTeam/umrt-ros/blob/47211bff4b9fc2855c530b28ccef6df13655ec44/launch/robot_peripherals.launch.py
+  - name: Electrical
+    description: >
+      The equipment deck brings power distribution, motor controllers, power
+      conversion, and cable routing into the chassis. Build photos show the
+      distribution board and controller wiring before the body panels were
+      fitted. Integration planning also covered the battery compartment,
+      breaker, contactor, and emergency-stop wiring.
+    photo:
+      image: ./images/2024-electronics-layout.jpg
+      alt: Prairie Pioneer's power distribution board, controller modules, converters, and wiring inside the open chassis.
+  - name: Embedded
+    description: >
+      Prairie Pioneer's ROS 2 monorepo separated drivetrain, rover peripherals,
+      and base-station launches. The drivetrain interface converted four wheel
+      velocity commands to PWM outputs. Camera and GPS integration supported
+      remote driving and field observations, alongside the first-year work on
+      bringing the Raspberry Pi, PWM driver, and onboard network together.
+    specifications:
+      - label: Software framework
+        value: ROS 2
+      - label: Drivetrain command interface
+        value: Four wheel commands to PWM
+    photo:
+      image: ./images/2024-integration-plan.jpg
+      alt: The first-year integration whiteboard showing the onboard computer, PWM driver, network, and section checklists.
+    links:
+      - label: 2024 drivetrain implementation
+        href: https://github.com/UMRoboticsTeam/umrt-ros/blob/47211bff4b9fc2855c530b28ccef6df13655ec44/src/example_2/hardware/diffbot_system.cpp
+  - name: Payload
+    description: >
+      Payload was the first-year section for science and task-specific
+      equipment. Its integration checklist included a 3D-printed scoop and
+      sample-testing work. The CIRC 2024 Environmental Assessment brief called
+      for locating fuel canisters, recording site imagery and GPS positions,
+      collecting separate soil samples, and preparing an environmental report.
+      This season used Payload rather than the later Mission Control section.
+    photo:
+      image: ./images/2024-integration-plan.jpg
+      alt: The 2024 integration checklist, including Payload's planned scoop and sample-testing work.
+    links:
+      - label: 2024 science task brief
+        href: https://circ.cstag.ca/2024/tasks/#environmental-assessment
+links:
+  - label: Prairie Pioneer software
+    href: https://github.com/UMRoboticsTeam/umrt-ros/tree/47211bff4b9fc2855c530b28ccef6df13655ec44
+---
+
+Prairie Pioneer was UMRT's first competition platform for CIRC 2024. Its
+four-wheel extrusion frame supported a white equipment enclosure, an elevated
+robotic arm, and a communications mast.
+
+The first-year design established the rover's ROS 2 drive, camera, GPS, and
+Arduino arm-control foundations. Payload handled the season's science and
+task-specific equipment; Mission Control joined the team structure in the
+following year.

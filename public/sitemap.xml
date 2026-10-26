@@ -12,6 +12,27 @@
         <lastmod>2025-03-15T00:00:00+00:00</lastmod>
         <priority>0.90</priority>
     </url>
+    <!-- Project directories and rover designs -->
+    <url>
+        <loc>https://umrt.ca/projects/</loc>
+        <priority>0.90</priority>
+    </url>
+    <url>
+        <loc>https://umrt.ca/projects/rovers/</loc>
+        <priority>0.90</priority>
+    </url>
+    <url>
+        <loc>https://umrt.ca/projects/rovers/2026-prairie-panther/</loc>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://umrt.ca/projects/rovers/2025-rover/</loc>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://umrt.ca/projects/rovers/2024-rover/</loc>
+        <priority>0.80</priority>
+    </url>
     <!-- Competitions -->
     <url>
         <loc>https://umrt.ca/competitions/</loc>

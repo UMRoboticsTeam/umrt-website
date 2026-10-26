@@ -16,6 +16,20 @@
   import * as THREE from 'three';
   import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
+  function getCameraFrustum(width: number, height: number) {
+    const aspect = width / height;
+    // Leave room around the rovers and their antenna masts, preserving
+    // that space horizontally when the canvas is narrow, too.
+    const halfHeight = 6 / Math.min(aspect, 1);
+
+    return {
+      left: -halfHeight * aspect,
+      right: halfHeight * aspect,
+      top: halfHeight,
+      bottom: -halfHeight,
+    };
+  }
+
   const wrappers = document.querySelectorAll('.voxel-wrapper');
 
   wrappers.forEach((wrapper) => {
@@ -186,13 +200,7 @@
         return;
       }
 
-      const aspect = width / height;
-      const d = 6;
-
-      camera.left = -d * aspect;
-      camera.right = d * aspect;
-      camera.top = d;
-      camera.bottom = -d;
+      Object.assign(camera, getCameraFrustum(width, height));
       camera.updateProjectionMatrix();
 
       renderer.setSize(width, height, false);
@@ -326,14 +334,13 @@
         /*
          * 2. Camera
          */
-        const aspect = width / height;
-        const d = 6;
+        const frustum = getCameraFrustum(width, height);
 
         camera = new THREE.OrthographicCamera(
-          -d * aspect,
-          d * aspect,
-          d,
-          -d,
+          frustum.left,
+          frustum.right,
+          frustum.top,
+          frustum.bottom,
           1,
           1000
         );
@@ -699,7 +706,7 @@
   pointer-events: none;
 }
 
-.voxel-container canvas {
+.voxel-container :global(canvas) {
   display: block;
 
   width: 100%;

@@ -2,17 +2,23 @@
 const navItems = [
   { href: '/#about', label: 'About' },
   { href: '/team', label: 'The Team' },
+  { href: '/projects', label: 'Projects' },
   { href: '/competitions', label: 'Competitions' },
   { href: '/sponsorships', label: 'Sponsorships' },
   { href: '/#join', label: 'Join Us!' },
 ];
+
+const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isCurrent = (href: string) =>
+  !href.includes('#') &&
+  (pathname === href || (href === '/projects' && pathname.startsWith('/projects/')));
 ---
 
 <header class="site-header">
   <nav class="navbar" id="mainNav">
     <div class="nav-container">
       <a class="navbar-brand" href="/" aria-label="UMRT home">
-        <img src="/assets/images/umrt-logo-transparent.png" />
+        <img src="/assets/images/umrt-logo-transparent.png" alt="UMRT" />
       </a>
 
       <button
@@ -32,7 +38,7 @@ const navItems = [
           {
             navItems.map((item) => (
               <li class="nav-item">
-                <a class="nav-link" href={item.href}>
+                <a class="nav-link" href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
                   {item.label}
                 </a>
               </li>
@@ -190,12 +196,14 @@ const navItems = [
 }
 
 .nav-link:hover,
-.nav-link:focus-visible {
+.nav-link:focus-visible,
+.nav-link[aria-current="page"] {
   color: #fff;
 }
 
 .nav-link:hover::after,
-.nav-link:focus-visible::after {
+.nav-link:focus-visible::after,
+.nav-link[aria-current="page"]::after {
   opacity: 1;
 }
 
@@ -246,7 +254,7 @@ const navItems = [
   transform: translateY(-7px) rotate(-45deg);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 960px) {
   .navbar-toggler {
     display: flex;
     margin-left: auto;
@@ -272,6 +280,10 @@ const navItems = [
   .navbar-collapse.show {
     display: block;
     transform: translateY(0);
+  }
+
+  .navbar-collapse.show::before {
+    opacity: 1;
   }
 
   .navbar-nav {
